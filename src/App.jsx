@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './AppFrío.css';
 import Navbar from './components/navbar/Navbar';
 import Destinations from './components/destinations/Destinations';
 import Footer from './components/footer/Footer';
+
 
 function App() {
   const [count, setCount] = useState(0);

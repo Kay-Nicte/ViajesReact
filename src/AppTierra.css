@@ -131,3 +131,16 @@ footer a:hover {
   background-color: var(--dark-brown-color) !important;
   border-color: var(--dark-brown-color) !important;
 }
+
+.welcome-text {
+  position: absolute;
+  top: 30%; /* Centra el texto verticalmente */
+  left: 50%; /* Centra el texto horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta para centrar el texto correctamente */
+  color: rgb(65, 61, 61); /* Cambia el color según tu diseño */
+  text-align: center; /* Centra el texto */
+  z-index: 1; /* Asegúrate de que el texto esté por encima de la imagen */
+  padding: 10px; /* Espaciado alrededor del texto */
+  border-radius: 5px; /* Bordes redondeados */
+  text-shadow: 40px 40px 40px rgb(255, 255, 255); /* Añade una sombra para mayor visibilidad */
+}
