@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import baliImage from '../../assets/imagenes/bali.jpg';
 import parisImage from '../../assets/imagenes/paris.jpg';
 import nyImage from '../../assets/imagenes/ny.jpg';
+import welcomeBackground from '../../assets/imagenes/welcome-background.jpg'; // Importa la imagen aquí
 
 const destinationsData = [
   {
@@ -23,7 +24,22 @@ const destinationsData = [
 
 const Destinations = () => {
   return (
-    <div className="container mt-5">
+    <div className="container-fluid p-0">
+      <div className="w-100 mb-4">
+        <img
+          src={welcomeBackground}
+          alt="Banner"
+          style={{
+            width: '100vw', // Ocupa el ancho completo de la ventana
+            height: 'auto',
+            objectFit: 'cover',
+            position: 'relative',
+            left: '50%',
+            marginLeft: '-50vw', // Compensa para centrar la imagen
+          }}
+        />
+      </div>
+
       <h1 className="text-center mb-4">Nuestros Destinos Populares</h1>
       <p className="text-center mb-5">
         Descubre los mejores destinos para tus próximas vacaciones.

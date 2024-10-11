@@ -2,7 +2,7 @@ import React from 'react';
 
 const Navbar: React.FC = () => {
     return (
-        <nav className="navbar navbar-expand-lg">
+        <nav className="navbar navbar-expand-lg sticky-top">
             <div className="container-fluid">
                 <a className="navbar-brand text-light" href="#">Viajes Ixa</a>
                 <button
@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
                             placeholder="Destinos"
                             aria-label="Search"
                         />
-                        <button className="btn btn-outline-light" type="submit">Buscar</button>
+                        <button className="btn-search" type="submit">Buscar</button>
                     </form>
                 </div>
             </div>
@@ -61,4 +61,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-    
