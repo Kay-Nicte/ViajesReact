@@ -1,0 +1,6 @@
+# Configurar los finales de línea para que sean LF en todos los sistemas
+* text=auto
+
+# Excepciones si hay archivos binarios
+*.png binary
+*.jpg binary
