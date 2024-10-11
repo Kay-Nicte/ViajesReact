@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",                // Especifica el estándar ECMAScript al que deseas compilar
+      "module": "ESNext",                // Especifica el sistema de módulos
+      "jsx": "react-jsx",                // Utiliza JSX para React
+      "moduleResolution": "node",        // Estrategia para resolver módulos
+      "esModuleInterop": true,           // Habilita interoperabilidad entre módulos ES y CommonJS
+      "skipLibCheck": true,              // Omite la verificación de tipo de archivos de declaración
+      "forceConsistentCasingInFileNames": true, // Asegura que las importaciones sean consistentes en mayúsculas/minúsculas
+      "strict": true,                    // Habilita todas las verificaciones estrictas
+      "baseUrl": ".",                    // Establece el directorio base para las resoluciones de módulos
+      "paths": {
+        "@/*": ["src/*"]                 // Permite el uso de rutas relativas desde src
+      }
+    },
+    "include": ["src", "jest.setup.js"],  // Archivos y directorios a incluir en el proceso de compilación
+    "exclude": ["node_modules"]           // Excluye la carpeta node_modules
+  }  
