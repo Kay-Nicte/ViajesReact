@@ -1,1 +1,0 @@
-import '@testing-library/jest-dom/extend-expect'; // Para las extensiones de jest-dom

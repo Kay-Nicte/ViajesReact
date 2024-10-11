@@ -1,0 +1,20 @@
+html, body {
+    height: 100%;
+    margin: 0; /* Asegúrate de que no haya márgenes por defecto */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    flex: 1; /* Esto permite que el main ocupe todo el espacio disponible */
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    /* Otras propiedades que desees aplicar */
+}

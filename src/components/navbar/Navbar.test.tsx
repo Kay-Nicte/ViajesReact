@@ -1,30 +1,31 @@
-import React from 'react';
+import React from 'react'; // 
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import Navbar from './Navbar';
+import Navbar from './Navbar'; 
 
 describe('Navbar Component', () => {
-  test('renders Navbar with title', () => {
-    render(<Navbar />);
-    const titleElement = screen.getByText(/Navbar/i);
-    expect(titleElement).toBeInTheDocument();
-  });
+    test('renders Navbar with title', () => {
+        render(<Navbar />);
+        const navbarElement = screen.getByText(/viajes ixa/i);
+        expect(navbarElement).toBeInTheDocument();
+    });
 
-  test('renders navigation links', () => {
-    render(<Navbar />);
-    
-    const homeLink = screen.getByText(/Home/i);
-    const linkElement = screen.getByText(/Link/i);
-    const dropdownElement = screen.getByText(/Dropdown/i);
-    
-    expect(homeLink).toBeInTheDocument();
-    expect(linkElement).toBeInTheDocument();
-    expect(dropdownElement).toBeInTheDocument();
-  });
+    test('renders nav links', () => {
+        render(<Navbar />);
+        const homeLink = screen.getByText(/inicio/i);
+        const dropdownLink = screen.getByText(/dropdown/i);
+        expect(homeLink).toBeInTheDocument();
+        expect(dropdownLink).toBeInTheDocument();
+    });
 
-  test('renders search input', () => {
-    render(<Navbar />);
-    const searchInput = screen.getByPlaceholderText(/Search/i);
-    expect(searchInput).toBeInTheDocument();
-  });
+    test('renders search input', () => {
+        render(<Navbar />);
+        const searchInput = screen.getByPlaceholderText(/destinos/i);
+        expect(searchInput).toBeInTheDocument();
+    });
+    
+    test('renders the collapse button', () => {
+        render(<Navbar />);
+        const collapseButton = screen.getByRole('button', { name: /toggle navigation/i });
+        expect(collapseButton).toBeInTheDocument();
+    });
 });
