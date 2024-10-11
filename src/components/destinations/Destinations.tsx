@@ -70,6 +70,7 @@ const DescriptionToggle: React.FC<DescriptionToggleProps> = ({ description }) =>
       <a
         href="#"
         className="link text-info"
+        id="linkLeerMas"
         onClick={(e) => {
           e.preventDefault(); // Evita que el enlace navegue
           toggleDescription(); // Cambia el estado

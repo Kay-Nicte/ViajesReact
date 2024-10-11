@@ -2,9 +2,9 @@ import React from 'react';
 
 const Navbar: React.FC = () => {
     return (
-        <nav className="navbar navbar-expand-lg bg-info">
+        <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">Viajes Ixa</a>
+                <a className="navbar-brand text-light" href="#">Viajes Ixa</a>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -19,14 +19,14 @@ const Navbar: React.FC = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Inicio</a>
+                            <a className="nav-link active text-light" aria-current="page" href="#">Inicio</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Paquetes</a>
+                            <a className="nav-link text-light" href="#">Paquetes</a>
                         </li>
                         <li className="nav-item dropdown">
                             <a
-                                className="nav-link dropdown-toggle"
+                                className="nav-link dropdown-toggle text-light"
                                 href="#"
                                 role="button"
                                 data-bs-toggle="dropdown"
@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+                            <a className="nav-link disabled text-light" aria-disabled="true">Disabled</a>
                         </li>
                     </ul>
                     <form className="d-flex" role="search">
@@ -61,3 +61,4 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+    

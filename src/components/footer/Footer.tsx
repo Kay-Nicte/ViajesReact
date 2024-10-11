@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className="bg-dark text-light py-2 mt-auto">
+        <footer className="footer py-2 mt-auto">
             <div className="container d-flex justify-content-between align-items-center">
                 <div className="text-center">
                     <p className="mb-0">© 2024 Viajes Ixa. Todos los derechos reservados.</p>

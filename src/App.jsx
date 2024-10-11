@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './App.css';
+import './AppFrío.css';
 import Navbar from './components/navbar/Navbar';
 import Destinations from './components/destinations/Destinations';
 import Footer from './components/footer/Footer';

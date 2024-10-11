@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;600&display=swap');
+
+/* Variables de colores */
+:root {
+  --primary-color: #795548;
+  --secondary-color: #d7ccc8;
+  --success-color: #a1887f;
+  --text-color: #5d4037;
+  --background-color: #f5f5f5;
+  --terracotta-color: #C84B31;
+  --beige-hover-color: #D8C3A5;
+  --warm-gray-color: #A68B6D;
+  --off-white-color: #F2EDE4;
+  --dark-brown-color: #6B4226;
+}
+
+/* Estilos generales */
+body {
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font-family: 'Lato', sans-serif;
+}
+
+/* Tipografías para títulos y navbar */
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--dark-brown-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand,
+.nav-link {
+  color: var(--off-white-color);
+}
+
+.nav-link:hover {
+  color: var(--beige-hover-color);
+}
+
+/* Botones */
+.btn, .btn-outline-light {
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.btn {
+  background-color: var(--terracotta-color);
+  color: var(--off-white-color);
+  border: none;
+}
+
+.btn:hover {
+  background-color: var(--beige-hover-color);
+  color: var(--dark-brown-color);
+}
+
+.btn-outline-light {
+  color: var(--off-white-color);
+  border-color: var(--off-white-color);
+}
+
+.btn-outline-light:hover {
+  background-color: var(--terracotta-color);
+  border-color: var(--terracotta-color);
+}
+
+/* Enlaces */
+a {
+  color: var(--terracotta-color);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+a:hover {
+  color: var(--beige-hover-color);
+}
+
+#linkLeerMas {
+  background-color: transparent !important;
+  color: var(--terracotta-color) !important;
+}
+
+/* Tarjetas */
+.card {
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card img {
+  border-radius: 12px 12px 0 0;
+}
+
+.card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Footer */
+footer {
+  background-color: var(--warm-gray-color);
+  color: var(--off-white-color);
+}
+
+footer a {
+  color: var(--off-white-color);
+}
+
+footer a:hover {
+  color: var(--beige-hover-color);
+}
+
+/* Colores personalizados */
+.bg-info, .text-info {
+  background-color: #062849 !important;
+  border-color: #003366 !important;
+  color: white !important;
+}
+
+.bg-success, .text-success {
+  background-color: #00695c !important;
+  border-color: #00695c !important;
+}
+
+.bg-warning, .text-warning {
+  background-color: var(--dark-brown-color) !important;
+  border-color: var(--dark-brown-color) !important;
+}

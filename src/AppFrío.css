@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;600&display=swap');
+
+/* Variables de colores */
+:root {
+  --primary-color: #17a2b8; /* Azul claro */
+  --secondary-color: #e0e0e0; /* Gris perla */
+  --success-color: #b0bec5; /* Gris azulado */
+  --text-color: #37474f; /* Gris oscuro */
+  --background-color: #f8f9fa; /* Gris claro para el fondo */
+  --hover-color: #aed9e0; /* Azul hover */
+  --off-white-color: #f2f3f4; /* Blanco roto */
+}
+
+/* Estilos generales */
+body {
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font-family: 'Lato', sans-serif;
+}
+
+/* Tipografías para títulos y navbar */
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--primary-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand,
+.nav-link {
+  color: var(--off-white-color);
+}
+
+.nav-link:hover {
+  color: var(--hover-color);
+}
+
+/* Botones */
+.btn, .btn-outline-light {
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.btn {
+  background-color: var(--primary-color);
+  color: var(--off-white-color);
+  border: none;
+}
+
+.btn:hover {
+  background-color: var(--hover-color);
+  color: var(--text-color);
+}
+
+.btn-outline-light {
+  color: var(--off-white-color);
+  border-color: var(--off-white-color);
+}
+
+.btn-outline-light:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Enlaces */
+a {
+  color: var(--primary-color);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+a:hover {
+  color: var(--hover-color);
+}
+
+#linkLeerMas {
+  background-color: transparent !important;
+  color: var(--primary-color) !important;
+}
+
+/* Tarjetas */
+.card {
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card img {
+  border-radius: 12px 12px 0 0;
+}
+
+.card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Footer */
+footer {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+footer a {
+  color: var(--text-color);
+}
+
+footer a:hover {
+  color: var(--hover-color);
+}
+
+/* Colores personalizados */
+.bg-info, .text-info {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.bg-success, .text-success {
+  background-color: var(--success-color) !important;
+  border-color: var(--success-color) !important;
+}
+
+.bg-warning, .text-warning {
+  background-color: var(--text-color) !important;
+  border-color: var(--text-color) !important;
+}
+
+/* Botón de búsqueda */
+.btn-search {
+    background-color: var(--primary-color); /* Azul claro */
+    color: var(--off-white-color); /* Blanco roto */
+    border: 2px solid var(--primary-color); /* Borde azul claro */
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efecto hover para el botón de búsqueda */
+.btn-search:hover {
+    background-color: var(--hover-color); /* Azul más suave */
+    color: var(--text-color); /* Gris oscuro */
+    transform: scale(1.05);
+}
+
+/* Para que sea más claro que es un botón */
+.btn-search:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(23, 162, 184, 0.5); /* Sombra azul para enfoque */
+}
