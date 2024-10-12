@@ -26,7 +26,6 @@ const destinationsData = [
   },
 ];
 
-// Nuevo arreglo para el contenido de las tarjetas
 const cardContents = [
   {
     title: 'Tú eres el protagonista del viaje',
@@ -50,7 +49,7 @@ const Destinations = () => {
     <div className="container-fluid p-0">
       {/* Banner */}
       <div
-        className="w-100 mb-4"
+        className="banner-container mb-4 position-relative"
         style={{
           height: '75vh',
           overflow: 'hidden',
@@ -60,25 +59,22 @@ const Destinations = () => {
         <img
           src={welcomeBackground}
           alt="Banner"
-          style={{
-            width: '100%',
-            height: 'auto',
-            objectFit: 'cover',
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-          }}
+          className="banner-image"
         />
-        <div className="welcome-text">
+
+
+        <div className="welcome-text text-light">
           <h2 className="text-center">Viajes culturales únicos</h2>
           <p className="text-center">Descubre lugares que solo podrás alcanzar con nosotros.</p>
           <button className='btn mt-4'>Explorar Destinos</button>
         </div>
       </div>
 
-      <h1 className="text-center mb-4">Nuestros Destinos Populares</h1>
-      <p className="text-center mb-5">
+      {/* Div azul debajo de la imagen de fondo */}
+      <div className="bg-blue"></div>
+
+      <h1 className="text-center mb-4" style={{ color: 'var(--secondary-color)' }}>Nuestros Destinos Populares</h1>
+      <p className="text-center mb-5" style={{ color: 'var(--secondary-color)' }}>
         Descubre los mejores destinos para tus próximas vacaciones.
         Desde playas exóticas hasta ciudades vibrantes, ¡hay algo para todos!
       </p>
@@ -107,7 +103,7 @@ const Destinations = () => {
 
       <h1 className="text-center my-5">¿Por qué elegir Viajes Ixa?</h1>
 
-      <div className="row">
+      <div className="row mx-auto w-75">
         {cardContents.map((card, index) => (
           <div className="col-md-6 col-lg-4 mb-4" key={index}>
             <div className="card h-100">

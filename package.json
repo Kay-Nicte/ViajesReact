@@ -46,12 +46,15 @@
     "setupFilesAfterEnv": [
       "<rootDir>/src/jest.setup.js"
     ],
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
-    },
-    "moduleNameMapper": {},
-    "transformIgnorePatterns": [
-      "/node_modules/"
-    ]
-  }
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|webp|svg)$": "<rootDir>/fileMock.js"
+    }
+  },
+  "transform": {
+    "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+  },
+  "moduleNameMapper": {},
+  "transformIgnorePatterns": [
+    "/node_modules/"
+  ]
 }

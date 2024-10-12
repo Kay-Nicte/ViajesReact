@@ -12,7 +12,7 @@ describe('Navbar Component', () => {
     test('renders nav links', () => {
         render(<Navbar />);
         const homeLink = screen.getByText(/inicio/i);
-        const dropdownLink = screen.getByText(/dropdown/i);
+        const dropdownLink = screen.getByText(/destinos/i);
         expect(homeLink).toBeInTheDocument();
         expect(dropdownLink).toBeInTheDocument();
     });

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;600&display=swap");
 
 /* Variables de colores */
 :root {
@@ -15,26 +15,32 @@
 body {
   color: var(--text-color);
   background-color: var(--background-color);
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 /* Tipografías para títulos y navbar */
-h1, h2, h3, h4, h5, h6, .navbar-brand {
-  font-family: 'Montserrat', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar-brand {
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
 }
 
 /* Navbar */
 
 .navbar::before {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 4px; /* Altura de la línea */
-    background-color: #D9A82A; /* Cambia al color que prefieras */
-    position: absolute;
-    top: 0;
-    left: 0;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px; /* Altura de la línea */
+  background-color: #d9a82a; /* Cambia al color que prefieras */
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .navbar {
@@ -52,7 +58,8 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 }
 
 /* Botones */
-.btn, .btn-outline-light {
+.btn,
+.btn-outline-light {
   border-radius: 8px;
   padding: 10px 20px;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
@@ -125,45 +132,48 @@ footer a:hover {
 }
 
 /* Colores personalizados */
-.bg-info, .text-info {
+.bg-info,
+.text-info {
   background-color: var(--primary-color) !important;
   border-color: var(--primary-color) !important;
   color: white !important;
 }
 
-.bg-success, .text-success {
+.bg-success,
+.text-success {
   background-color: var(--success-color) !important;
   border-color: var(--success-color) !important;
 }
 
-.bg-warning, .text-warning {
+.bg-warning,
+.text-warning {
   background-color: var(--text-color) !important;
   border-color: var(--text-color) !important;
 }
 
 /* Botón de búsqueda */
 .btn-search {
-    background-color: var(--primary-color); /* Azul claro */
-    color: var(--off-white-color); /* Blanco roto */
-    border: 2px solid whitesmoke; /* Borde blanco */
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  background-color: var(--primary-color); /* Azul claro */
+  color: var(--off-white-color); /* Blanco roto */
+  border: 2px solid whitesmoke; /* Borde blanco */
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
 /* Efecto hover para el botón de búsqueda */
 .btn-search:hover {
-    background-color: var(--hover-color); /* Azul más suave */
-    color: var(--text-color); /* Gris oscuro */
-    transform: scale(1.05);
+  background-color: var(--hover-color); /* Azul más suave */
+  color: var(--text-color); /* Gris oscuro */
+  transform: scale(1.05);
 }
 
 /* Para que sea más claro que es un botón */
 .btn-search:focus {
-    outline: none;
-    box-shadow: 0 0 10px rgba(23, 162, 184, 0.5); /* Sombra azul para enfoque */
+  outline: none;
+  box-shadow: 0 0 10px rgba(23, 162, 184, 0.5); /* Sombra azul para enfoque */
 }
 
 .welcome-text {
@@ -171,10 +181,52 @@ footer a:hover {
   top: 30%; /* Centra el texto verticalmente */
   left: 50%; /* Centra el texto horizontalmente */
   transform: translate(-50%, -50%); /* Ajusta para centrar el texto correctamente */
-  color: rgb(65, 61, 61); /* Cambia el color según tu diseño */
   text-align: center; /* Centra el texto */
   z-index: 1; /* Asegúrate de que el texto esté por encima de la imagen */
   padding: 10px; /* Espaciado alrededor del texto */
   border-radius: 5px; /* Bordes redondeados */
   text-shadow: 40px 40px 40px rgb(255, 255, 255); /* Añade una sombra para mayor visibilidad */
+}
+
+/* Bloque azul */
+.bg-blue {
+  background-color: var(--primary-color);
+  position: absolute; /* Cambiamos a relativo */
+  margin-top: -39px; /* Ajusta este valor según lo que necesites */
+  width: 100%;
+  height: 333px; /* Ajusta la altura según lo que necesites */
+  z-index: -1; /* Asegúrate de que esté detrás del texto */
+}
+
+/* Texto en el banner */
+.welcome-text {
+  position: absolute;
+  top: 30%; /* Centra el texto verticalmente */
+  left: 50%; /* Centra el texto horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta para centrar el texto correctamente */
+  color: rgb(65, 61, 61); /* Cambia el color según tu diseño */
+  text-align: center; /* Centra el texto */
+  z-index: 1; /* Asegúrate de que el texto esté por encima del bloque azul */
+  padding: 10px; /* Espaciado alrededor del texto */
+  border-radius: 5px; /* Bordes redondeados */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Sombra para mayor visibilidad */
+}
+
+/* Estilo del contenedor del banner */
+.banner-container {
+  height: 75vh;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 4rem; /* Ajusta según sea necesario */
+}
+
+/* Imagen de fondo */
+.banner-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
