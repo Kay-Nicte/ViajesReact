@@ -73,6 +73,9 @@ const Destinations = () => {
       {/* Div azul debajo de la imagen de fondo */}
       <div className="bg-blue"></div>
 
+      {/* Div gris debajo del azul */}
+      <div className="bg-gray"></div>
+      
       <h1 className="text-center mb-4" style={{ color: 'var(--secondary-color)' }}>Nuestros Destinos Populares</h1>
       <p className="text-center mb-5" style={{ color: 'var(--secondary-color)' }}>
         Descubre los mejores destinos para tus próximas vacaciones.
