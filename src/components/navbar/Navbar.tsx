@@ -1,11 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
     return (
         <nav className="navbar navbar-expand-lg sticky-top">
             <div className="container-fluid">
-                <a className="navbar-brand text-light" href="#">Viajes Ixa</a>
-                <button
+                <Link to="/" className="navbar-brand text-light">
+                    Viajes Ixa
+                </Link>                <button
                     className="navbar-toggler"
                     type="button"
                     data-bs-toggle="collapse"
@@ -35,11 +37,11 @@ const Navbar: React.FC = () => {
                                 Destinos
                             </a>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">Euskadi</a></li>
-                                <li><a className="dropdown-item" href="#">Catalunya</a></li>
-                                <li><a className="dropdown-item" href="#">Andalucía</a></li>
+                                <li><a className="dropdown-item" href="#">Bali</a></li>
+                                <li><a className="dropdown-item" href="#">París</a></li>
+                                <li><a className="dropdown-item" href="#">Nueva York</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Portugal</a></li>
+                                <li><a className="dropdown-item" href="#">Próximamente...</a></li>
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item" href="#">Paquetes de viajes</a></li>
                             </ul>
