@@ -30,8 +30,6 @@ h6,
   font-weight: 600;
 }
 
-
-
 /* Navbar */
 
 .navbar::before {
@@ -90,8 +88,8 @@ h6,
 
 /* Estilo para pantallas más pequeñas (móviles) */
 @media (max-width: 768px) {
-  .btn{
-    padding: 0.5em 1em;  /* Tamaño reducido con unidades relativas */
+  .btn {
+    padding: 0.5em 1em; /* Tamaño reducido con unidades relativas */
     font-size: 0.8rem; /* Fuente más pequeña */
     border-radius: 0.375em; /* Bordes menos redondeados */
   }
@@ -203,9 +201,9 @@ footer a:hover {
 @media (max-width: 768px) {
   .welcome-text {
     margin-top: 5rem;
-    text-align: center; 
+    text-align: center;
     width: 70%; /* Ancho del 90% del contenedor */
-    max-width: 600px; 
+    max-width: 600px;
     margin-left: auto; /* Centra el contenedor horizontalmente */
     margin-right: auto; /* Centra el contenedor horizontalmente */
   }
@@ -219,15 +217,23 @@ footer a:hover {
   }
 }
 
-
 /* Bloque azul */
 .bg-blue {
   background-color: var(--primary-color);
-  position: absolute; /* Cambiamos a relativo */
-  margin-top: -39px; /* Ajusta este valor según lo que necesites */
+  position: absolute;
+  margin-top: -39px;
   width: 100%;
-  height: 333px; /* Ajusta la altura según lo que necesites */
-  z-index: -1; /* Asegúrate de que esté detrás del texto */
+  height: 333px;
+  z-index: -1;
+}
+
+/* Ajustes para pantallas más pequeñas (móviles) */
+@media (max-width: 768px) {
+  .bg-blue {
+    height: 44vh !important; /* Cambia esto para ajustar la altura en móviles */
+    margin-top: -39px; /* Mantén el margen negativo */
+    z-index: -1; /* Asegúrate de que esté detrás del texto */
+  }
 }
 
 /* Bloque gris */
@@ -237,7 +243,16 @@ footer a:hover {
   margin-top: 294px; /* Ajusta este valor según lo que necesites */
   width: 100%;
   height: 493px; /* Ajusta la altura según lo que necesites */
-  z-index: -1; /* Asegúrate de que esté detrás del texto */
+  z-index: -2; /* Asegúrate de que esté detrás del texto */
+}
+
+/* Ajustes para pantallas más pequeñas (móviles) */
+@media (max-width: 768px) {
+  .bg-gray {
+    height: 52vh !important; /* Cambia esto para ajustar la altura en móviles */
+    margin-top: 365px; /* Mantén el margen negativo */
+    z-index: -1; /* Asegúrate de que esté detrás del texto */
+  }
 }
 
 /* Texto en el banner */
@@ -258,7 +273,7 @@ footer a:hover {
 .banner-container {
   width: 100%;
   height: 100vh; /* Ocupa toda la altura de la pantalla */
-  background-image: url('./assets/imagenes/welcome-background.jpg'); /* Cambia por la ruta de tu imagen */
+  background-image: url("./assets/imagenes/welcome-background.jpg"); /* Cambia por la ruta de tu imagen */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -272,7 +287,6 @@ footer a:hover {
   }
 }
 
-
 /* Imagen de fondo */
 .banner-image {
   width: 100%;
@@ -282,4 +296,12 @@ footer a:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@media (max-width: 768px) {
+  #xq {
+    width: 70%;
+    margin-left: auto; /* Centra el contenedor horizontalmente */
+    margin-right: auto; /* Centra el contenedor horizontalmente */
+  }
 }

@@ -35,14 +35,17 @@ const Navbar: React.FC = () => {
                                 Destinos
                             </a>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">Action</a></li>
-                                <li><a className="dropdown-item" href="#">Another action</a></li>
+                                <li><a className="dropdown-item" href="#">Euskadi</a></li>
+                                <li><a className="dropdown-item" href="#">Catalunya</a></li>
+                                <li><a className="dropdown-item" href="#">Andalucía</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Something else here</a></li>
+                                <li><a className="dropdown-item" href="#">Portugal</a></li>
+                                <li><hr className="dropdown-divider" /></li>
+                                <li><a className="dropdown-item" href="#">Paquetes de viajes</a></li>
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link disabled text-light" aria-disabled="true">Disabled</a>
+                            <a className="nav-link text-light" href="#">Favoritos</a>
                         </li>
                     </ul>
                     <form className="d-flex" role="search">

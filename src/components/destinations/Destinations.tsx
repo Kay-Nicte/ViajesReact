@@ -71,8 +71,8 @@ const Destinations = () => {
       </p>
 
       {/* Carrusel */}
-      <div className="my-4 mx-auto w-50">
-        <Carousel>
+      <div className="carousel my-4 mx-auto w-50">
+      <Carousel>
           {destinationsData.map((destination, index) => (
             <Carousel.Item key={index}>
               <div style={{ height: '300px', overflow: 'hidden' }}>
@@ -92,7 +92,7 @@ const Destinations = () => {
         </Carousel>
       </div>
 
-      <h1 className="text-center my-5">¿Por qué elegir Viajes Ixa?</h1>
+      <h1 className="text-center my-5" id='xq'>¿Por qué elegir Viajes Ixa?</h1>
 
       <div className="row mx-auto w-75">
         {cardContents.map((card, index) => (
