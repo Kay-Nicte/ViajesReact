@@ -133,7 +133,7 @@ const Destinations = () => {
             <div className="card-body">
               <h5 className="card-title">Para cancelaciones una vez confirmada la salida del viaje</h5>
               <hr className="my-2" /> {/* Línea horizontal con margen vertical */}
-              <p className="card-text">La política de cancelación de 3000KM siempre ha sido la de devolver todo el dinero posible. Consultanos sobre los seguros de cancelación.</p>
+              <p className="card-text">La política de cancelación de Viajes Ixa siempre ha sido la de devolver todo el dinero posible. Consultanos sobre los seguros de cancelación.</p>
             </div>
           </div>
         </div>
