@@ -90,9 +90,9 @@ h6,
 
 /* Estilo para pantallas más pequeñas (móviles) */
 @media (max-width: 768px) {
-  btn{
+  .btn{
     padding: 0.5em 1em;  /* Tamaño reducido con unidades relativas */
-    font-size: 0.875rem; /* Fuente más pequeña */
+    font-size: 0.8rem; /* Fuente más pequeña */
     border-radius: 0.375em; /* Bordes menos redondeados */
   }
 }
@@ -202,10 +202,23 @@ footer a:hover {
 /* Ajustes para pantallas más pequeñas (móviles) */
 @media (max-width: 768px) {
   .welcome-text {
-    margin-top: 5rem; /* Ajusta este valor según sea necesario */
-    text-align: center; /* Asegúrate de que el texto esté centrado */
+    margin-top: 5rem;
+    text-align: center; 
+    width: 70%; /* Ancho del 90% del contenedor */
+    max-width: 600px; 
+    margin-left: auto; /* Centra el contenedor horizontalmente */
+    margin-right: auto; /* Centra el contenedor horizontalmente */
+  }
+
+  .welcome-text h2 {
+    font-size: 1.5rem; /* Aumenta el tamaño del texto del encabezado */
+  }
+
+  .welcome-text p {
+    font-size: 1rem; /* Aumenta el tamaño del texto del párrafo */
   }
 }
+
 
 /* Bloque azul */
 .bg-blue {
