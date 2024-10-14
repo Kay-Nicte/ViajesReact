@@ -199,6 +199,14 @@ footer a:hover {
   text-shadow: 40px 40px 40px rgb(255, 255, 255); /* Añade una sombra para mayor visibilidad */
 }
 
+/* Ajustes para pantallas más pequeñas (móviles) */
+@media (max-width: 768px) {
+  .welcome-text {
+    margin-top: 5rem; /* Ajusta este valor según sea necesario */
+    text-align: center; /* Asegúrate de que el texto esté centrado */
+  }
+}
+
 /* Bloque azul */
 .bg-blue {
   background-color: var(--primary-color);
