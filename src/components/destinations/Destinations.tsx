@@ -50,19 +50,7 @@ const Destinations = () => {
       {/* Banner */}
       <div
         className="banner-container mb-4 position-relative"
-        style={{
-          height: '75vh',
-          overflow: 'hidden',
-          position: 'relative',
-        }}
       >
-        <img
-          src={welcomeBackground}
-          alt="Banner"
-          className="banner-image"
-        />
-
-
         <div className="welcome-text text-light">
           <h2 className="text-center">Viajes culturales únicos</h2>
           <p className="text-center">Descubre lugares que solo podrás alcanzar con nosotros.</p>
@@ -75,7 +63,7 @@ const Destinations = () => {
 
       {/* Div gris debajo del azul */}
       <div className="bg-gray"></div>
-      
+
       <h1 className="text-center mb-4" style={{ color: 'var(--secondary-color)' }}>Nuestros Destinos Populares</h1>
       <p className="text-center mb-5" style={{ color: 'var(--secondary-color)' }}>
         Descubre los mejores destinos para tus próximas vacaciones.
