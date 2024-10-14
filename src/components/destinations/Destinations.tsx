@@ -72,7 +72,7 @@ const Destinations = () => {
 
       {/* Carrusel */}
       <div className="carousel my-4 mx-auto w-50">
-      <Carousel>
+        <Carousel>
           {destinationsData.map((destination, index) => (
             <Carousel.Item key={index}>
               <div style={{ height: '300px', overflow: 'hidden' }}>
@@ -112,6 +112,34 @@ const Destinations = () => {
           </div>
         ))}
       </div>
+
+      <div className="text-center my-5">
+        <h3>Reserva con tranquilidad</h3>
+        <p>Con Viajes Ixa cambiar de plan es fácil. Reserva sin preocupaciones.</p>
+      </div>
+
+      <div className="row w-75 mx-auto mb-5 d-flex align-items-stretch">
+        <div className="col-sm-6 mb-3 mb-sm-0">
+          <div className="card h-100"> {/* Asegúrate de que la tarjeta también ocupe toda la altura */}
+            <div className="card-body">
+              <h5 className="card-title">Para cancelaciones 30 días antes de la salida del viaje</h5>
+              <hr className="my-2" /> {/* Línea horizontal con margen vertical */}
+              <p className="card-text">Si necesitas cambiar tus planes de viaje durante este año y antes de la confirmación del viaje, no te cobraremos nada.</p>
+            </div>
+          </div>
+        </div>
+        <div className="col-sm-6">
+          <div className="card h-100"> {/* Asegúrate de que la tarjeta también ocupe toda la altura */}
+            <div className="card-body">
+              <h5 className="card-title">Para cancelaciones una vez confirmada la salida del viaje</h5>
+              <hr className="my-2" /> {/* Línea horizontal con margen vertical */}
+              <p className="card-text">La política de cancelación de 3000KM siempre ha sido la de devolver todo el dinero posible. Consultanos sobre los seguros de cancelación.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </div>
   );
 };
