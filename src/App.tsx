@@ -4,9 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './AppFrío.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
-import Footer from './components/footer/Footer';
-import DestinationsPage from './pages/DestinationsPage';
 import HomePage from './components/home/HomePage';
+import DestinationsPage from './pages/DestinationsPage';
+import FAQPage from './pages/FAQPage'; // Importa la página de FAQ
+import Footer from './components/footer/Footer';
 
 function App() {
     const [searchTerm, setSearchTerm] = useState<string>(''); // Estado para el término de búsqueda
@@ -22,15 +23,16 @@ function App() {
                 <main className="flex-fill">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
-                        <Route 
-                            path="/destinos" 
+                        <Route
+                            path="/destinos"
                             element={
-                                <DestinationsPage 
-                                    searchTerm={searchTerm} 
+                                <DestinationsPage
+                                    searchTerm={searchTerm}
                                     setSearchTerm={setSearchTerm} // Pasa también setSearchTerm
                                 />
-                            } 
+                            }
                         />
+                        <Route path="/faq" element={<FAQPage />} /> {/* Añade la ruta para FAQ */}
                     </Routes>
                 </main>
                 <Footer />
