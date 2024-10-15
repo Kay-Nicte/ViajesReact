@@ -101,15 +101,49 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
   border-color: var(--primary-color);
   color: var(--primary-color);
 }
+.bg-blue {
+  background-color: var(--primary-color) !important; /* Asegura que el color de fondo se aplique */
+  position: absolute;
+  top: 665px; 
+  width: 100%;
+  height: 321px; 
+  z-index: -1; 
+}
+
+.bg-gray {
+  background-color: var(--success-color) !important; /* Asegura que el color de fondo se aplique */
+  position: absolute;
+  top: 986px; 
+  width: 100%;
+  height: 493px; 
+  z-index: -1; 
+}
 
 /* ------------------------ */
 /* Estilo para pantallas más pequeñas (móviles) */
 /* ------------------------ */
+
 @media (max-width: 768px) {
   .btn {
     padding: 0.5em 1em; /* Tamaño reducido con unidades relativas */
     font-size: 0.8rem; /* Fuente más pequeña */
     border-radius: 0.375em; /* Bordes menos redondeados */
+  } 
+  
+  .bg-blue {
+    position: absolute;
+    top: 723px; 
+    width: 100%;
+    height: 385px; 
+    z-index: -1; 
+  }
+
+  .bg-gray {
+    position: absolute;
+    top: 1107px; 
+    width: 100%;
+    height: 515px; 
+    z-index: -1; 
   }
 
   .welcome-text {
@@ -138,13 +172,6 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     margin-right: auto; /* Centra el contenedor horizontalmente */
   }
 
-  .bg-blue {
-    height: 70vh !important; /* Cambia esto para ajustar la altura en móviles */
-  }
-
-  .bg-gray {
-    height: 52vh !important; /* Cambia esto para ajustar la altura en móviles */
-  }
 }
 
 /* ------------------------ */
