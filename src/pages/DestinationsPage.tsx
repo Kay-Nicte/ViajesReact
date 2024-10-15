@@ -4,8 +4,14 @@ import baliImage from '/src/assets/imagenes/bali.jpg';
 import parisImage from '/src/assets/imagenes/paris.jpg';
 import nyImage from '/src/assets/imagenes/ny.jpg';
 import portoImage from '/src/assets/imagenes/porto.jpg';
-import Modal from '../components/modals/modal'; 
+import Modal from '../components/modals/modal';
 import '../AppFrío.css';
+
+// Define las propiedades que recibirá el componente
+interface DestinationsPageProps {
+    searchTerm: string; // Acepta searchTerm como prop
+    setSearchTerm: (term: string) => void; // Acepta setSearchTerm como prop
+}
 
 interface Destination {
     name: string;
@@ -15,11 +21,7 @@ interface Destination {
     visitRoutes: string[];
 }
 
-interface DestinationsPageProps {
-    searchTerm: string; // Prop para recibir el término de búsqueda
-}
-
-const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm }) => {
+const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSearchTerm }) => {
     const destinations: Destination[] = [
         { name: 'Bali', description: 'Una isla tropical paradisíaca', image: baliImage, price: 1300, visitRoutes: ['Ruta 1: Meditación', 'Ruta 2: Templos', 'Ruta 3: '] },
         { name: 'París', description: 'La ciudad del amor y la moda', image: parisImage, price: 200, visitRoutes: ['Ruta 1: Gastronomía', 'Ruta 2: ', 'Ruta 3: '] },
@@ -28,11 +30,13 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm }) => {
     ];
 
     const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
-    const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal
+    const [showModal, setShowModal] = useState(false);
+    const [minPrice, setMinPrice] = useState<number | ''>(''); // Estado para el precio mínimo
+    const [maxPrice, setMaxPrice] = useState<number | ''>(''); // Estado para el precio máximo
 
     const handleShowModal = (destination: Destination) => {
         setSelectedDestination(destination);
-        setShowModal(true); // Muestra el modal
+        setShowModal(true);
     };
 
     const handleCloseModal = () => {
@@ -40,14 +44,69 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm }) => {
         setSelectedDestination(null);
     };
 
-    // Filtra destinos según el término de búsqueda recibido como prop
-    const filteredDestinations = destinations.filter(destination =>
-        destination.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // Filtra destinos según el término de búsqueda y el rango de precios
+    const filteredDestinations = destinations.filter(destination => {
+        const isNameMatch = destination.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const isMinPriceMatch = minPrice ? destination.price >= minPrice : true; // Comprobar precio mínimo
+        const isMaxPriceMatch = maxPrice ? destination.price <= maxPrice : true; // Comprobar precio máximo
+        return isNameMatch && isMinPriceMatch && isMaxPriceMatch;
+    });
 
     return (
         <div className='mx-4'>
             <h2 className='text-center my-5'>Explora Nuestros Destinos</h2>
+
+            {/* Sección de Filtros */}
+            <div className="filters mb-4 d-flex flex-wrap justify-content-center">
+                <input
+                    type="text"
+                    placeholder="Buscar destinos..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)} // Utiliza la función recibida para actualizar el término de búsqueda
+                    className="form-control me-2" // Espacio entre campos
+                    style={{
+                        borderRadius: '20px',
+                        padding: '10px 20px',
+                        border: '1px solid #ccc',
+                        boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+                        fontSize: '16px',
+                        width: '200px', // Ancho reducido
+                    }}
+                />
+
+                {/* Filtros de precio */}
+                <input
+                    type="number"
+                    placeholder="Min. Precio"
+                    value={minPrice}
+                    onChange={(e) => setMinPrice(e.target.value ? Number(e.target.value) : '')} // Actualiza el estado del precio mínimo
+                    className="form-control me-2" // Espacio entre campos
+                    style={{
+                        borderRadius: '20px',
+                        padding: '10px 20px',
+                        border: '1px solid #ccc',
+                        boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+                        fontSize: '16px',
+                        width: '140px', // Ancho reducido
+                    }}
+                />
+                <input
+                    type="number"
+                    placeholder="Max. Precio"
+                    value={maxPrice}
+                    onChange={(e) => setMaxPrice(e.target.value ? Number(e.target.value) : '')} // Actualiza el estado del precio máximo
+                    className="form-control"
+                    style={{
+                        borderRadius: '20px',
+                        padding: '10px 20px',
+                        border: '1px solid #ccc',
+                        boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+                        fontSize: '16px',
+                        width: '140px', // Ancho reducido
+                    }}
+                />
+            </div>
+
             <div className="row">
                 {filteredDestinations.map((destination, index) => (
                     <div className="col-md-4 mb-4" key={index}>
