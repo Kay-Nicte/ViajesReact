@@ -1,4 +1,3 @@
-// src/App.jsx
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './AppFrío.css';

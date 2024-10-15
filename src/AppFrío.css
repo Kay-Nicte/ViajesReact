@@ -86,6 +86,19 @@ h6,
   border-color: var(--primary-color);
 }
 
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background-color: transparent;
+  border: 2px solid var(--primary-color) !important; 
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--off-white-color);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
 /* Estilo para pantallas más pequeñas (móviles) */
 @media (max-width: 768px) {
   .btn {
@@ -304,4 +317,42 @@ footer a:hover {
     margin-left: auto; /* Centra el contenedor horizontalmente */
     margin-right: auto; /* Centra el contenedor horizontalmente */
   }
+}
+
+/* Estilos para el modal */
+.modal-content {
+  border-radius: 0.5rem; /* Bordes redondeados */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+.modal-header {
+  background-color: var(--primary-color); /* Color de fondo del encabezado */
+  color: white; /* Color del texto en el encabezado */
+}
+
+.modal-title {
+  font-size: 1.5rem; /* Tamaño del título */
+  font-weight: bold; /* Negrita */
+}
+
+.modal-body {
+  padding: 1.5rem; /* Espaciado del contenido */
+}
+
+.modal-footer {
+  justify-content: flex-end; /* Alinear botones a la derecha */
+}
+
+/* Ajustes para el botón de cerrar */
+.btn-close {
+  background: transparent; /* Fondo transparente para el botón de cerrar */
+  border: none; /* Sin borde */
+}
+
+/* Transiciones para el modal */
+.modal.fade {
+  transition: opacity 0.3s ease; /* Transición suave */
+}
+.modal.show {
+  opacity: 1; /* Opacidad completa cuando se muestra */
 }
