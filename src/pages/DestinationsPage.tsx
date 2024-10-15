@@ -4,6 +4,7 @@ import baliImage from '/src/assets/imagenes/bali.jpg';
 import parisImage from '/src/assets/imagenes/paris.jpg';
 import nyImage from '/src/assets/imagenes/ny.jpg';
 import portoImage from '/src/assets/imagenes/porto.jpg';
+import Modal from '../components/modals/modal'; 
 import '../AppFrío.css';
 
 interface Destination {
@@ -23,16 +24,19 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm }) => {
         { name: 'Bali', description: 'Una isla tropical paradisíaca', image: baliImage, price: 1300, visitRoutes: ['Ruta 1: Meditación', 'Ruta 2: Templos', 'Ruta 3: '] },
         { name: 'París', description: 'La ciudad del amor y la moda', image: parisImage, price: 200, visitRoutes: ['Ruta 1: Gastronomía', 'Ruta 2: ', 'Ruta 3: '] },
         { name: 'Nueva York', description: 'La ciudad que nunca duerme', image: nyImage, price: 1500, visitRoutes: ['Ruta 1: Monumentos', 'Ruta 2: ', 'Ruta 3: '] },
-        { name: 'Porto', description: 'La ciudad de los puentes y el vino', image: portoImage, price: 300, visitRoutes: ['Ruta 1: Cata de Vinos', 'Ruta 2: Paseo por el río', 'Ruta 3: Centro Histórico'] }, // Nuevo destino
+        { name: 'Porto', description: 'La ciudad de los puentes y el vino', image: portoImage, price: 300, visitRoutes: ['Ruta 1: Cata de Vinos', 'Ruta 2: Paseo por el río', 'Ruta 3: Centro Histórico'] },
     ];
 
     const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
+    const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal
 
     const handleShowModal = (destination: Destination) => {
         setSelectedDestination(destination);
+        setShowModal(true); // Muestra el modal
     };
 
     const handleCloseModal = () => {
+        setShowModal(false);
         setSelectedDestination(null);
     };
 
@@ -72,29 +76,23 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm }) => {
                 ))}
             </div>
 
-            {selectedDestination && (
-                <div className="modal fade show" style={{ display: 'block' }} onClick={handleCloseModal}>
-                    <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">{selectedDestination.name}</h5>
-                                <button type="button" className="btn-close" onClick={handleCloseModal}></button>
-                            </div>
-                            <div className="modal-body">
-                                <p><strong>Precio:</strong> {selectedDestination.price}€</p>
-                                <p><strong>Rutas:</strong></p>
-                                <ul>
-                                    {selectedDestination.visitRoutes.map((route, index) => (
-                                        <li key={index}>{route}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" onClick={handleCloseModal}>Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {/* Modal Component */}
+            {showModal && selectedDestination && (
+                <Modal 
+                    onClose={handleCloseModal} 
+                    title={selectedDestination.name} 
+                    body={
+                        <>
+                            <p><strong>Precio:</strong> {selectedDestination.price}€</p>
+                            <p><strong>Rutas:</strong></p>
+                            <ul>
+                                {selectedDestination.visitRoutes.map((route, index) => (
+                                    <li key={index}>{route}</li>
+                                ))}
+                            </ul>
+                        </>
+                    }
+                />
             )}
         </div>
     );

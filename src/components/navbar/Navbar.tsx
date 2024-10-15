@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Modal from '../modals/modal'; 
 
 interface Destination {
     name: string;
@@ -117,30 +118,25 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
                     </div>
                 </div>
             </div>
+
+            {/* Usar el componente Modal para mostrar la información del destino seleccionado */}
             {selectedDestination && (
-                <div className="modal fade show" style={{ display: 'block' }} onClick={handleCloseModal}>
-                    <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">{selectedDestination.name}</h5>
-                                <button type="button" className="btn-close" onClick={handleCloseModal}></button>
-                            </div>
-                            <div className="modal-body">
-                                <p><strong>Descripción:</strong> {selectedDestination.description}</p>
-                                <p><strong>Precio:</strong> {selectedDestination.price}€</p>
-                                <p><strong>Rutas:</strong></p>
-                                <ul>
-                                    {selectedDestination.visitRoutes.map((route, index) => (
-                                        <li key={index}>{route}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" onClick={handleCloseModal}>Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Modal
+                    onClose={handleCloseModal}
+                    title={selectedDestination.name}
+                    body={
+                        <>
+                            <p><strong>Descripción:</strong> {selectedDestination.description}</p>
+                            <p><strong>Precio:</strong> {selectedDestination.price}€</p>
+                            <p><strong>Rutas:</strong></p>
+                            <ul>
+                                {selectedDestination.visitRoutes.map((route, index) => (
+                                    <li key={index}>{route}</li>
+                                ))}
+                            </ul>
+                        </>
+                    }
+                />
             )}
         </nav>
     );
