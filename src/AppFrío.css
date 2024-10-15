@@ -25,7 +25,13 @@ body {
 /* ------------------------ */
 /* Tipografías para títulos y navbar */
 /* ------------------------ */
-h1, h2, h3, h4, h5, h6, .navbar-brand {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar-brand {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
 }
@@ -62,7 +68,8 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 /* ------------------------ */
 /* Botones */
 /* ------------------------ */
-.btn, .btn-outline-light {
+.btn,
+.btn-outline-light {
   border-radius: 8px;
   padding: 10px 20px;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
@@ -93,7 +100,7 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
   color: var(--primary-color);
   border-color: var(--primary-color);
   background-color: transparent;
-  border: 2px solid var(--primary-color) !important; 
+  border: 2px solid var(--primary-color) !important;
 }
 
 .btn-outline-primary:hover {
@@ -104,19 +111,29 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 .bg-blue {
   background-color: var(--primary-color) !important; /* Asegura que el color de fondo se aplique */
   position: absolute;
-  top: 665px; 
+  top: 665px;
   width: 100%;
-  height: 321px; 
-  z-index: -1; 
+  height: 321px;
+  z-index: -1;
 }
 
 .bg-gray {
   background-color: var(--success-color) !important; /* Asegura que el color de fondo se aplique */
   position: absolute;
-  top: 986px; 
+  top: 986px;
   width: 100%;
-  height: 493px; 
-  z-index: -1; 
+  height: 493px;
+  z-index: -1;
+}
+
+.filter-width {
+  width: 13vw;
+}
+
+.filter-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Por defecto, cuatro columnas (un filtro por columna) */
+  gap: 1rem; /* Espacio entre los filtros */
 }
 
 /* ------------------------ */
@@ -128,23 +145,41 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     padding: 0.5em 1em; /* Tamaño reducido con unidades relativas */
     font-size: 0.8rem; /* Fuente más pequeña */
     border-radius: 0.375em; /* Bordes menos redondeados */
-  } 
-  
+  }
+
   .bg-blue {
     position: absolute;
-    top: 723px; 
+    top: 723px;
     width: 100%;
-    height: 385px; 
-    z-index: -1; 
+    height: 385px;
+    z-index: -1;
   }
 
   .bg-gray {
     position: absolute;
-    top: 1107px; 
+    top: 1107px;
     width: 100%;
-    height: 515px; 
-    z-index: -1; 
+    height: 515px;
+    z-index: -1;
   }
+
+  .filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-width {
+    flex: 1; /* O puedes usar un tamaño fijo si prefieres */
+    min-width: 139px; /* Para un tamaño mínimo de los filtros */
+    margin: 0.5rem; /* Espacio entre filtros */
+}
+
+.form-control {
+    width: auto; /* Deja que los inputs se ajusten al contenido */
+}
+
 
   .welcome-text {
     margin-top: 5rem;
@@ -171,7 +206,6 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     margin-left: auto; /* Centra el contenedor horizontalmente */
     margin-right: auto; /* Centra el contenedor horizontalmente */
   }
-
 }
 
 /* ------------------------ */
@@ -319,7 +353,6 @@ footer a:hover {
 .modal-footer {
   border-top: none; /* Eliminar borde superior */
 }
-
 
 .select__control {
   border-radius: 50px !important; /* Bordes redondeados */

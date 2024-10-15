@@ -77,46 +77,53 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
             <h2 className='text-center my-5'>Explora Nuestros Destinos</h2>
 
             {/* Sección de Filtros */}
-            <div className="filters mb-4 d-flex flex-wrap justify-content-center align-items-center">
+            <div className="filter-container mb-4 d-flex flex-wrap justify-content-center align-items-center">
                 <input
                     type="text"
-                    placeholder="Buscar destinos..."
+                    placeholder="Buscar destinos"
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)} // Utiliza la función recibida para actualizar el término de búsqueda
-                    className="form-control me-2 w-auto rounded-pill"
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="form-control me-2 rounded-pill filter-width text-center"
                 />
-
-                {/* Filtros de precio */}
                 <input
                     type="number"
                     placeholder="Min. Precio"
                     value={minPrice}
-                    onChange={(e) => setMinPrice(e.target.value ? Number(e.target.value) : '')} // Actualiza el estado del precio mínimo
-                    className="form-control me-2 w-auto rounded-pill"
+                    onChange={(e) => setMinPrice(e.target.value ? Number(e.target.value) : '')}
+                    className="form-control me-2 rounded-pill filter-width text-center"
                 />
                 <input
                     type="number"
                     placeholder="Max. Precio"
                     value={maxPrice}
-                    onChange={(e) => setMaxPrice(e.target.value ? Number(e.target.value) : '')} // Actualiza el estado del precio máximo
-                    className="form-control w-auto rounded-pill"
+                    onChange={(e) => setMaxPrice(e.target.value ? Number(e.target.value) : '')}
+                    className="form-control rounded-pill filter-width text-center"
                 />
-
-                {/* Selector de ordenación usando react-select */}
-                <div>
-                    <Select 
-                        options={sortOptions} 
-                        onChange={(selectedOption) => setSortOption(selectedOption?.value || 'popularity')} 
-                        className="react-select mx-2" 
+                <div className="filter-width">
+                    <Select
+                        options={sortOptions}
+                        onChange={(selectedOption) => setSortOption(selectedOption?.value || 'popularity')}
+                        className="react-select mx-2 text-center"
                         classNamePrefix="select"
                         placeholder="Ordenar por..."
+                        styles={{
+                            container: (base) => ({
+                                ...base,
+                                width: '100%', // Asegúrate de que el contenedor ocupe todo el ancho
+                                minWidth: '139px', // O el tamaño que desees
+                            }),
+                            control: (base) => ({
+                                ...base,
+                                width: '100%', // Asegúrate de que el control ocupe todo el ancho
+                            }),
+                        }}
                     />
                 </div>
             </div>
 
             <div className="row">
                 {sortedDestinations.map((destination, index) => (
-                    <div className="col-md-4 mb-4" key={index}>
+                    <div className="col-6 col-md-4 mb-4" key={index}>
                         <div className="card d-flex flex-column h-100">
                             <img
                                 src={destination.image}
@@ -144,9 +151,9 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
 
             {/* Modal Component */}
             {showModal && selectedDestination && (
-                <Modal 
-                    onClose={handleCloseModal} 
-                    title={selectedDestination.name} 
+                <Modal
+                    onClose={handleCloseModal}
+                    title={selectedDestination.name}
                     body={
                         <>
                             <p><strong>Precio:</strong> {selectedDestination.price}€</p>
