@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Modal from '../modals/modal'; 
+import Modal from '../modals/Modal'; 
 
 interface Destination {
     name: string;
