@@ -29,7 +29,6 @@ const FAQPage: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                {/* Agrega más preguntas aquí */}
             </div>
         </div>
     );

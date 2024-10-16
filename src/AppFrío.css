@@ -65,6 +65,9 @@ h6,
   color: var(--hover-color);
 }
 
+.dropdown-menu:hover, .dropdown-item:hover {
+  color: var(--primary-color);
+}
 /* ------------------------ */
 /* Botones */
 /* ------------------------ */

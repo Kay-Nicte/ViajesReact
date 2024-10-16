@@ -8,7 +8,7 @@ import portoImage from '/src/assets/imagenes/porto.jpg';
 import Modal from '../components/modals/Modal';
 import '../AppFrío.css';
 
-// Define las propiedades que recibirá el componente
+//Propiedades que recibirá el componente
 interface DestinationsPageProps {
     searchTerm: string; // Acepta searchTerm como prop
     setSearchTerm: (term: string) => void; // Acepta setSearchTerm como prop
@@ -19,7 +19,7 @@ interface Destination {
     description: string;
     image: string;
     price: number;
-    popularity: number; // Añadir una propiedad de popularidad
+    popularity: number; 
     visitRoutes: string[];
 }
 
@@ -59,11 +59,11 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
     const sortedDestinations = [...filteredDestinations].sort((a, b) => {
         switch (sortOption) {
             case 'price':
-                return a.price - b.price; // Ordenar por precio
+                return a.price - b.price; 
             case 'popularity':
-                return b.popularity - a.popularity; // Ordenar por popularidad
+                return b.popularity - a.popularity; 
             default:
-                return 0; // Sin orden
+                return 0; 
         }
     });
 
@@ -109,12 +109,12 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
                         styles={{
                             container: (base) => ({
                                 ...base,
-                                width: '100%', // Asegúrate de que el contenedor ocupe todo el ancho
-                                minWidth: '139px', // O el tamaño que desees
+                                width: '100%', 
+                                minWidth: '139px', 
                             }),
                             control: (base) => ({
                                 ...base,
-                                width: '100%', // Asegúrate de que el control ocupe todo el ancho
+                                width: '100%', 
                             }),
                         }}
                     />

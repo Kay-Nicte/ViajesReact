@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Modal from '../modals/Modal'; 
+import Modal from '../modals/Modal';
 
 interface Destination {
     name: string;
@@ -86,7 +86,13 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
                             </a>
                             <ul className="dropdown-menu">
                                 {destinations.map((destination, index) => (
-                                    <li key={index}><a className="dropdown-item" href="#">{destination.name}</a></li>
+                                    <li key={index}> <a
+                                        className="dropdown-item"
+                                        href="#"
+                                        onClick={() => setSelectedDestination(destination)} // Abrir modal con el destino seleccionado
+                                    >
+                                        {destination.name}
+                                    </a></li>
                                 ))}
                             </ul>
                         </li>

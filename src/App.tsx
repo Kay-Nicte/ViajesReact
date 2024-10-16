@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import HomePage from './components/home/HomePage';
 import DestinationsPage from './pages/DestinationsPage';
-import FAQPage from './pages/FAQPage'; // Importa la página de FAQ
+import FAQPage from './pages/FAQPage'; 
 import Footer from './components/footer/Footer';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
     return (
         <Router>
             <div className="d-flex flex-column min-vh-100">
-                <Navbar onSearch={handleSearch} /> {/* Pasa la función de búsqueda aquí */}
+                <Navbar onSearch={handleSearch} />
                 <main className="flex-fill">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
@@ -28,11 +28,11 @@ function App() {
                             element={
                                 <DestinationsPage
                                     searchTerm={searchTerm}
-                                    setSearchTerm={setSearchTerm} // Pasa también setSearchTerm
+                                    setSearchTerm={setSearchTerm} 
                                 />
                             }
                         />
-                        <Route path="/faq" element={<FAQPage />} /> {/* Añade la ruta para FAQ */}
+                        <Route path="/faq" element={<FAQPage />} /> 
                     </Routes>
                 </main>
                 <Footer />
