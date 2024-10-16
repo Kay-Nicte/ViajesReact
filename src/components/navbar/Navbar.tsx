@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Modal from '../modals/Modal';
+import ModalDestination from '../modals/ModalDestinations';
+import ModalContact from '../modals/ModalContact';
 
 interface Destination {
     name: string;
@@ -10,13 +11,14 @@ interface Destination {
 }
 
 interface NavbarProps {
-    onSearch: (term: string) => void; // Agregar la prop onSearch
+    onSearch: (term: string) => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [suggestions, setSuggestions] = useState<Destination[]>([]);
     const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
+    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
     const destinations: Destination[] = [
         { name: 'Bali', description: 'Una isla tropical paradisíaca', price: 1300, visitRoutes: ['Ruta 1: Meditación', 'Ruta 2: Templos', 'Ruta 3: '] },
@@ -28,7 +30,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setSearchTerm(value);
-        onSearch(value); // Llama a la función onSearch al cambiar el input
+        onSearch(value);
 
         if (value) {
             const filteredDestinations = destinations.filter(destination =>
@@ -45,8 +47,12 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
         setSuggestions([]);
     };
 
-    const handleCloseModal = () => {
+    const handleCloseModalDestination = () => {
         setSelectedDestination(null);
+    };
+
+    const handleCloseContactModal = () => {
+        setIsContactModalOpen(false);
     };
 
     return (
@@ -68,12 +74,6 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <a className="nav-link active text-light" aria-current="page" href="#">Inicio</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link text-light" href="#">Paquetes</a>
-                        </li>
                         <li className="nav-item dropdown">
                             <a
                                 className="nav-link dropdown-toggle text-light"
@@ -86,18 +86,42 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
                             </a>
                             <ul className="dropdown-menu">
                                 {destinations.map((destination, index) => (
-                                    <li key={index}> <a
-                                        className="dropdown-item"
-                                        href="#"
-                                        onClick={() => setSelectedDestination(destination)} // Abrir modal con el destino seleccionado
-                                    >
-                                        {destination.name}
-                                    </a></li>
+                                    <li key={index}>
+                                        <a
+                                            className="dropdown-item"
+                                            href="#"
+                                            onClick={() => setSelectedDestination(destination)}
+                                        >
+                                            {destination.name}
+                                        </a>
+                                    </li>
                                 ))}
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-light" href="#">Favoritos</a>
+                            <a className="nav-link text-light" href="#">Paquetes</a>
+                        </li>
+                        <li className="nav-item">
+                            <a
+                                className="nav-link text-light"
+                                href="#"
+                                onClick={(e) => {
+                                    e.preventDefault(); // Evita que la página se recargue
+                                    setShowModal(true);
+                                }}
+                            >
+                                Favoritos
+                            </a>
+                        </li>
+
+                        <li className="nav-item">
+                            <a
+                                className="nav-link text-light"
+                                href="#"
+                                onClick={() => setIsContactModalOpen(true)} // Abrir modal de contacto
+                            >
+                                Contacto
+                            </a>
                         </li>
                     </ul>
                     <div className="position-relative">
@@ -125,10 +149,10 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
                 </div>
             </div>
 
-            {/* Usar el componente Modal para mostrar la información del destino seleccionado */}
+            {/* Modal de destino */}
             {selectedDestination && (
-                <Modal
-                    onClose={handleCloseModal}
+                <ModalDestination
+                    onClose={handleCloseModalDestination}
                     title={selectedDestination.name}
                     body={
                         <>
@@ -143,6 +167,11 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
                         </>
                     }
                 />
+            )}
+
+            {/* Modal de contacto */}
+            {isContactModalOpen && (
+                <ModalContact onClose={handleCloseContactModal} />
             )}
         </nav>
     );

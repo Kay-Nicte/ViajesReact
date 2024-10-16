@@ -65,7 +65,8 @@ h6,
   color: var(--hover-color);
 }
 
-.dropdown-menu:hover, .dropdown-item:hover {
+.dropdown-menu:hover,
+.dropdown-item:hover {
   color: var(--primary-color);
 }
 /* ------------------------ */
@@ -111,6 +112,12 @@ h6,
   border-color: var(--primary-color);
   color: var(--primary-color);
 }
+
+.corazon {
+  cursor: pointer;
+  display: inline-flex;
+}
+
 .bg-blue {
   background-color: var(--primary-color) !important; /* Asegura que el color de fondo se aplique */
   position: absolute;
@@ -171,18 +178,17 @@ h6,
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-}
+  }
 
-.filter-width {
+  .filter-width {
     flex: 1; /* O puedes usar un tamaño fijo si prefieres */
     min-width: 139px; /* Para un tamaño mínimo de los filtros */
     margin: 0.5rem; /* Espacio entre filtros */
-}
+  }
 
-.form-control {
+  .form-control {
     width: auto; /* Deja que los inputs se ajusten al contenido */
-}
-
+  }
 
   .welcome-text {
     margin-top: 5rem;
