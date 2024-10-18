@@ -7,29 +7,24 @@ import parisImage from '/src/assets/imagenes/paris.jpg';
 import nyImage from '/src/assets/imagenes/ny.jpg';
 import portoImage from '/src/assets/imagenes/porto.jpg';
 import Modal from '../components/modals/ModalDestinations';
+import { Destination } from '../interface-models/interfaceDestination';
+import ModalFavorites from '../components/modals/ModalFavorites'; // Asegúrate de importar el modal de favoritos
 import '../AppFrío.css';
 
-//Propiedades que recibirá el componente
+// Propiedades que recibirá el componente
 interface DestinationsPageProps {
     searchTerm: string; // Acepta searchTerm como prop
     setSearchTerm: (term: string) => void; // Acepta setSearchTerm como prop
+    addToFavorites: (destination: Destination) => void;
+    destinations: { id: number; name: string }[];
 }
 
-interface Destination {
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    popularity: number;
-    visitRoutes: string[];
-}
-
-const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSearchTerm }) => {
+const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSearchTerm, addToFavorites }) => {
     const destinations: Destination[] = [
-        { name: 'Bali', description: 'Una isla tropical paradisíaca', image: baliImage, price: 1300, popularity: 5, visitRoutes: ['Ruta 1: Meditación', 'Ruta 2: Templos', 'Ruta 3: Playas'] },
-        { name: 'París', description: 'La ciudad del amor y la moda', image: parisImage, price: 200, popularity: 4, visitRoutes: ['Ruta 1: Gastronomía', 'Ruta 2: Museos', 'Ruta 3: Monumentos'] },
-        { name: 'Nueva York', description: 'La ciudad que nunca duerme', image: nyImage, price: 1500, popularity: 5, visitRoutes: ['Ruta 1: Monumentos', 'Ruta 2: Broadway', 'Ruta 3: Central Park'] },
-        { name: 'Porto', description: 'La ciudad de los puentes y el vino', image: portoImage, price: 300, popularity: 3, visitRoutes: ['Ruta 1: Cata de Vinos', 'Ruta 2: Paseo por el río', 'Ruta 3: Centro Histórico'] },
+        { id: 1, name: 'Bali', description: 'Una isla tropical paradisíaca', image: baliImage, price: 1300, popularity: 5, visitRoutes: ['Ruta 1: Meditación', 'Ruta 2: Templos', 'Ruta 3: Playas'] },
+        { id: 2, name: 'París', description: 'La ciudad del amor y la moda', image: parisImage, price: 200, popularity: 4, visitRoutes: ['Ruta 1: Gastronomía', 'Ruta 2: Museos', 'Ruta 3: Monumentos'] },
+        { id: 3, name: 'Nueva York', description: 'La ciudad que nunca duerme', image: nyImage, price: 1500, popularity: 5, visitRoutes: ['Ruta 1: Monumentos', 'Ruta 2: Broadway', 'Ruta 3: Central Park'] },
+        { id: 4, name: 'Porto', description: 'La ciudad de los puentes y el vino', image: portoImage, price: 300, popularity: 3, visitRoutes: ['Ruta 1: Cata de Vinos', 'Ruta 2: Paseo por el río', 'Ruta 3: Centro Histórico'] },
     ];
 
     const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
@@ -37,7 +32,8 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
     const [minPrice, setMinPrice] = useState<number | ''>(''); // Estado para el precio mínimo
     const [maxPrice, setMaxPrice] = useState<number | ''>(''); // Estado para el precio máximo
     const [sortOption, setSortOption] = useState('popularity'); // Opción de ordenación inicial
-    const [favorites, setFavorites] = useState<string[]>([]); // Estado para Favoritos
+    const [favorites, setFavorites] = useState<Destination[]>([]);
+    const [showFavoritesModal, setShowFavoritesModal] = useState(false); // Estado para el modal de favoritos
 
     const handleShowModal = (destination: Destination) => {
         setSelectedDestination(destination);
@@ -49,18 +45,16 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
         setSelectedDestination(null);
     };
 
-    const toggleFavorite = (destinationName: string) => {
-        if (favorites.includes(destinationName)) {
-            // Si ya es favorito, lo quitamos
-            setFavorites(favorites.filter(fav => fav !== destinationName));
-            alert(`${destinationName} eliminado de Favoritos`);
-        } else {
-            // Si no es favorito, lo añadimos
-            setFavorites([...favorites, destinationName]);
-            alert(`${destinationName} agregado a Favoritos`);
+    const handleAddToFavorites = (destination: Destination) => {
+        if (!favorites.some(fav => fav.id === destination.id)) {
+            addToFavorites(destination);
+            setFavorites(prevFavorites => [...prevFavorites, destination]); // Actualiza el estado de favoritos
         }
     };
 
+    const handleRemoveFromFavorites = (destination: Destination) => {
+        setFavorites(prevFavorites => prevFavorites.filter(fav => fav.id !== destination.id));
+    };
 
     // Filtra destinos según el término de búsqueda y el rango de precios
     const filteredDestinations = destinations.filter(destination => {
@@ -149,15 +143,23 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
                             <div className="card-body d-flex flex-column">
                                 <span
                                     className="corazon justify-content-end"
-                                    onClick={() => toggleFavorite(destination.name)}
-                                    aria-label="Agregar a favoritos"
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Evitar que el clic en el corazón abra el modal
+                                        if (favorites.some(fav => fav.id === destination.id)) {
+                                            handleRemoveFromFavorites(destination); // Usar la función para eliminar de favoritos
+                                        } else {
+                                            handleAddToFavorites(destination); // Usar la misma función que el modal
+                                        }
+                                    }}
+                                    aria-label="Agregar o quitar de favoritos"
                                 >
-                                    {favorites.includes(destination.name) ? (
-                                        <FaHeart color="red" size={24} />
+                                    {favorites.some(fav => fav.id === destination.id) ? (
+                                        <FaHeart size={25} className="text-danger" />
                                     ) : (
-                                        <FaRegHeart color="gray" size={24} />
+                                        <FaRegHeart size={25} />
                                     )}
                                 </span>
+
                                 <p className="card-text flex-grow-1 text-center">{destination.description}</p>
                                 <div className="d-flex justify-content-center mt-2">
                                     <Link to={`/reservar/${destination.name.toLowerCase()}`} className="btn btn-primary w-45 mx-1">Reservar</Link>
@@ -174,15 +176,16 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
                 ))}
             </div>
 
-            {/* Modal Component */}
+            {/* ModalDestinations Component */}
             {showModal && selectedDestination && (
                 <Modal
                     onClose={handleCloseModal}
                     title={selectedDestination.name}
                     body={
                         <>
-                            <p><strong>Precio:</strong> {selectedDestination.price}€</p>
-                            <p><strong>Rutas:</strong></p>
+                            <p><strong>Precio:</strong> ${selectedDestination.price}</p>
+                            <p><strong>Descripción:</strong> {selectedDestination.description}</p>
+                            <p><strong>Rutas a Visitar:</strong></p>
                             <ul>
                                 {selectedDestination.visitRoutes.map((route, index) => (
                                     <li key={index}>{route}</li>
@@ -190,8 +193,21 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
                             </ul>
                         </>
                     }
+                    onAddToFavorites={handleAddToFavorites} 
+                    selectedDestination={selectedDestination} 
                 />
             )}
+
+            {/* Modal de Favoritos */}
+            <button className="btn btn-danger" onClick={() => setShowFavoritesModal(true)}>
+                Ver Favoritos
+            </button>
+            <ModalFavorites
+                favorites={favorites}
+                isOpen={showFavoritesModal}
+                onClose={() => setShowFavoritesModal(false)}
+                onRemoveFromFavorites={handleRemoveFromFavorites} 
+            />
         </div>
     );
 };
