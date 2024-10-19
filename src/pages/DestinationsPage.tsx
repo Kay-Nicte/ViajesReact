@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
-import { FaHeart, FaRegHeart } from 'react-icons/fa'; // Para los iconos de corazón
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import baliImage from '/src/assets/imagenes/bali.jpg';
 import parisImage from '/src/assets/imagenes/paris.jpg';
 import nyImage from '/src/assets/imagenes/ny.jpg';
 import portoImage from '/src/assets/imagenes/porto.jpg';
 import Modal from '../components/modals/ModalDestinations';
 import { Destination } from '../interface-models/interfaceDestination';
-import ModalFavorites from '../components/modals/ModalFavorites'; // Asegúrate de importar el modal de favoritos
+import ModalFavorites from '../components/modals/ModalFavorites';
 import '../AppFrío.css';
 
-// Propiedades que recibirá el componente
 interface DestinationsPageProps {
-    searchTerm: string; // Acepta searchTerm como prop
-    setSearchTerm: (term: string) => void; // Acepta setSearchTerm como prop
+    searchTerm: string;
+    setSearchTerm: (term: string) => void;
     addToFavorites: (destination: Destination) => void;
+    removeFromFavorites: (destination: Destination) => void;
     destinations: { id: number; name: string }[];
 }
 
-const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSearchTerm, addToFavorites }) => {
+const DestinationsPage: React.FC<DestinationsPageProps> = ({
+    searchTerm,
+    setSearchTerm,
+    addToFavorites,
+    removeFromFavorites,
+}) => {
     const destinations: Destination[] = [
         { id: 1, name: 'Bali', description: 'Una isla tropical paradisíaca', image: baliImage, price: 1300, popularity: 5, visitRoutes: ['Ruta 1: Meditación', 'Ruta 2: Templos', 'Ruta 3: Playas'] },
         { id: 2, name: 'París', description: 'La ciudad del amor y la moda', image: parisImage, price: 200, popularity: 4, visitRoutes: ['Ruta 1: Gastronomía', 'Ruta 2: Museos', 'Ruta 3: Monumentos'] },
@@ -29,11 +34,11 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
 
     const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
     const [showModal, setShowModal] = useState(false);
-    const [minPrice, setMinPrice] = useState<number | ''>(''); // Estado para el precio mínimo
-    const [maxPrice, setMaxPrice] = useState<number | ''>(''); // Estado para el precio máximo
-    const [sortOption, setSortOption] = useState('popularity'); // Opción de ordenación inicial
+    const [minPrice, setMinPrice] = useState<number | ''>('');
+    const [maxPrice, setMaxPrice] = useState<number | ''>('');
+    const [sortOption, setSortOption] = useState('popularity');
     const [favorites, setFavorites] = useState<Destination[]>([]);
-    const [showFavoritesModal, setShowFavoritesModal] = useState(false); // Estado para el modal de favoritos
+    const [showFavoritesModal, setShowFavoritesModal] = useState(false);
 
     const handleShowModal = (destination: Destination) => {
         setSelectedDestination(destination);
@@ -45,26 +50,37 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
         setSelectedDestination(null);
     };
 
-    const handleAddToFavorites = (destination: Destination) => {
-        if (!favorites.some(fav => fav.id === destination.id)) {
-            addToFavorites(destination);
-            setFavorites(prevFavorites => [...prevFavorites, destination]); // Actualiza el estado de favoritos
+    const handleFavoriteToggle = (destination: Destination) => {
+        if (favorites.some(fav => fav.id === destination.id)) {
+            console.log('Removing from favorites:', destination);
+            handleRemoveFromFavorites(destination);
+        } else {
+            console.log('Añadir a fav. DestinationsPage:', destination);
+            handleAddToFavorites(destination);
         }
     };
 
     const handleRemoveFromFavorites = (destination: Destination) => {
-        setFavorites(prevFavorites => prevFavorites.filter(fav => fav.id !== destination.id));
+        console.log("Eliminando destino desde DestinationsPage:", destination.name); 
+        setFavorites(prevFavorites => 
+            prevFavorites.filter(fav => fav.id !== destination.id));
+        removeFromFavorites(destination); 
     };
 
-    // Filtra destinos según el término de búsqueda y el rango de precios
+    const handleAddToFavorites = (destination: Destination) => {
+        if (!favorites.some(fav => fav.id === destination.id)) {
+            addToFavorites(destination);
+            setFavorites(prevFavorites => [...prevFavorites, destination]);
+        }
+    };
+
     const filteredDestinations = destinations.filter(destination => {
         const isNameMatch = destination.name.toLowerCase().includes(searchTerm.toLowerCase());
-        const isMinPriceMatch = minPrice ? destination.price >= minPrice : true; // Comprobar precio mínimo
-        const isMaxPriceMatch = maxPrice ? destination.price <= maxPrice : true; // Comprobar precio máximo
+        const isMinPriceMatch = minPrice ? destination.price >= minPrice : true;
+        const isMaxPriceMatch = maxPrice ? destination.price <= maxPrice : true;
         return isNameMatch && isMinPriceMatch && isMaxPriceMatch;
     });
 
-    // Ordena destinos según la opción seleccionada
     const sortedDestinations = [...filteredDestinations].sort((a, b) => {
         switch (sortOption) {
             case 'price':
@@ -85,7 +101,6 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
         <div className='mx-4'>
             <h2 className='text-center my-5'>Explora Nuestros Destinos</h2>
 
-            {/* Sección de Filtros */}
             <div className="filter-container mb-4 d-flex flex-wrap justify-content-center align-items-center">
                 <input
                     type="text"
@@ -144,12 +159,8 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
                                 <span
                                     className="corazon justify-content-end"
                                     onClick={(e) => {
-                                        e.stopPropagation(); // Evitar que el clic en el corazón abra el modal
-                                        if (favorites.some(fav => fav.id === destination.id)) {
-                                            handleRemoveFromFavorites(destination); // Usar la función para eliminar de favoritos
-                                        } else {
-                                            handleAddToFavorites(destination); // Usar la misma función que el modal
-                                        }
+                                        e.stopPropagation();
+                                        handleFavoriteToggle(destination);
                                     }}
                                     aria-label="Agregar o quitar de favoritos"
                                 >
@@ -176,7 +187,6 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
                 ))}
             </div>
 
-            {/* ModalDestinations Component */}
             {showModal && selectedDestination && (
                 <Modal
                     onClose={handleCloseModal}
@@ -193,21 +203,20 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ searchTerm, setSear
                             </ul>
                         </>
                     }
-                    onAddToFavorites={handleAddToFavorites} 
-                    selectedDestination={selectedDestination} 
+                    onAddToFavorites={handleAddToFavorites}
+                    selectedDestination={selectedDestination}
                 />
             )}
 
-            {/* Modal de Favoritos */}
-            <button className="btn btn-danger" onClick={() => setShowFavoritesModal(true)}>
-                Ver Favoritos
-            </button>
-            <ModalFavorites
-                favorites={favorites}
-                isOpen={showFavoritesModal}
-                onClose={() => setShowFavoritesModal(false)}
-                onRemoveFromFavorites={handleRemoveFromFavorites} 
-            />
+            {showFavoritesModal && (
+                <ModalFavorites
+                    isOpen={showFavoritesModal}
+                    onClose={() => setShowFavoritesModal(false)}
+                    favorites={favorites}
+                    onAddToFavorites={handleAddToFavorites}
+                    onRemoveFromFavorites={handleRemoveFromFavorites}
+                />
+            )}
         </div>
     );
 };

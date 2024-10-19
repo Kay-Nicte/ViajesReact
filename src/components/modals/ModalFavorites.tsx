@@ -1,16 +1,21 @@
 import { Destination } from '@/interface-models/interfaceDestination';
 import React from 'react';
-import { FaTimes } from 'react-icons/fa';
 
 interface ModalFavoritesProps {
     favorites: Destination[];
     isOpen: boolean;
     onClose: () => void;
-    onRemoveFromFavorites: (destination: Destination) => void; // Cambiado
+    onAddToFavorites: (destination: Destination) => void;
+    onRemoveFromFavorites: (destination: Destination) => void;
 }
 
 const ModalFavorites: React.FC<ModalFavoritesProps> = ({ favorites, isOpen, onClose, onRemoveFromFavorites }) => {
     if (!isOpen) return null;
+
+    const handleRemove = (destination: Destination) => {
+        console.log("Eliminando destino desde ModalFavorites:", destination);
+        onRemoveFromFavorites(destination); // Llamar a la función del padre!!
+    };
 
     return (
         <div className="modal fade show" style={{ display: 'block' }}>
@@ -26,12 +31,6 @@ const ModalFavorites: React.FC<ModalFavoritesProps> = ({ favorites, isOpen, onCl
                                 {favorites.map((destination) => (
                                     <li key={destination.id}>
                                         <strong>{destination.name}</strong>
-                                        <button
-                                            className="btn btn-sm mx-2"
-                                            onClick={() => onRemoveFromFavorites(destination)} // Cambiado
-                                        >
-                                            X
-                                        </button>
                                     </li>
                                 ))}
                             </ul>

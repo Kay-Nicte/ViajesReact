@@ -33,7 +33,8 @@ describe('ModalFavorites', () => {
                 favorites={favorites} 
                 onClose={() => {}} 
                 isOpen={true} 
-                onAddToFavorites={() => {}} 
+                onAddToFavorites={() => {}}
+                onRemoveFromFavorites={() => {}} 
             />
         );
 
@@ -49,11 +50,12 @@ describe('ModalFavorites', () => {
                 onClose={() => {}} 
                 isOpen={true} 
                 onAddToFavorites={() => {}} 
+                onRemoveFromFavorites={() => {}}
             />
         );
 
         // Verifica que el modal esté visible
-        const modal = getByRole('dialog'); // Asegúrate de que el modal tenga el rol dialog
+        const modal = getByRole('dialog'); 
         expect(modal).toBeVisible();
     });
 
@@ -66,6 +68,7 @@ describe('ModalFavorites', () => {
                 onClose={mockOnClose} 
                 isOpen={true} 
                 onAddToFavorites={() => {}} 
+                onRemoveFromFavorites={() => {}}
             />
         );
 

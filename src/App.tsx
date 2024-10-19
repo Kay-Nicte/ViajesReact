@@ -32,13 +32,21 @@ function App() {
         });
     };
 
+    const removeFromFavorites = (destination: Destination) => {
+        setFavorites(prevFavorites =>
+            prevFavorites.filter(fav => fav.id !== destination.id)
+        );
+    };
+
+
     return (
         <Router>
             <div className="d-flex flex-column min-vh-100">
                 <Navbar
                     onSearch={handleSearch}
                     addToFavorites={addToFavorites}
-                    favorites={favorites} // Pasando los favoritos al Navbar
+                    removeFromFavorites={removeFromFavorites}
+                    favorites={favorites} 
                 />
                 <main className="flex-fill">
                     <Routes>
@@ -50,7 +58,8 @@ function App() {
                                     searchTerm={searchTerm}
                                     setSearchTerm={setSearchTerm}
                                     addToFavorites={addToFavorites}
-                                    destinations={destinations} // Asegúrate de pasar los destinos aquí
+                                    removeFromFavorites={removeFromFavorites} 
+                                    destinations={destinations} 
                                 />
                             }
                         />
@@ -61,8 +70,9 @@ function App() {
                 <ModalFavorites
                     favorites={favorites}
                     isOpen={isFavoritesModalOpen}
-                    onClose={() => setIsFavoritesModalOpen(false)} // Función para cerrar el modal
-                    onAddToFavorites={addToFavorites} // Pasando la función para añadir a favoritos
+                    onClose={() => setIsFavoritesModalOpen(false)} 
+                    onAddToFavorites={addToFavorites} 
+                    onRemoveFromFavorites={removeFromFavorites}
                 />
             </div>
         </Router>

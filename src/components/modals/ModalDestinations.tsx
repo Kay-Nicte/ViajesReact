@@ -2,7 +2,7 @@ import { Destination } from '@/interface-models/interfaceDestination';
 import React from 'react';
 
 interface ModalDestinationProps {
-    onClose: () => void; // Función para cerrar el modal
+    onClose: () => void; // Para cerrar el modal
     title: string; // Título del modal
     body: JSX.Element;
     onAddToFavorites: (destination: Destination) => void;
@@ -10,7 +10,7 @@ interface ModalDestinationProps {
 }
 
 const ModalDestinations: React.FC<ModalDestinationProps> = ({ onClose, title, body, selectedDestination, onAddToFavorites }) => {
-    // Función para manejar la reserva
+
     const handleReserve = () => {
         alert("Reservado. ¡Feliz viaje! :)");
     };

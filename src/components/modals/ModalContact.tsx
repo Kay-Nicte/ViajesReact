@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 interface ModalContactProps {
-    onClose: () => void; // Función para cerrar el modal
+    onClose: () => void; // Para cerrar el modal
 }
 
 const ModalContact: React.FC<ModalContactProps> = ({ onClose }) => {
