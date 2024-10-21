@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
-import { FaShoppingBag, FaHeart, FaRegHeart, FaShoppingBasket } from 'react-icons/fa';
+import { FaShoppingCart, FaHeart, FaRegHeart } from 'react-icons/fa';
 import baliImage from '/src/assets/imagenes/bali.jpg';
 import parisImage from '/src/assets/imagenes/paris.jpg';
 import nyImage from '/src/assets/imagenes/ny.jpg';
@@ -215,9 +215,13 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
                                         aria-label="Agregar o quitar de carrito"
                                     >
                                         {reservedDestinations.some(res => res.id === destination.id) ? (
-                                            <FaShoppingBag size={25} className="text-danger" />
+                                            <button className='btn btn-secondary h-100'>
+                                                Reservado
+                                            </button>
                                         ) : (
-                                            <FaShoppingBasket size={25} />
+                                            <button className='btn btn-primary h-100'>
+                                                Reservar
+                                            </button>
                                         )}
                                     </span>
 

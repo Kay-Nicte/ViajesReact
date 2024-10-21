@@ -159,7 +159,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, addToFavorites, removeFromFav
                             />
                             <button className="btn-search" type="submit">Buscar</button>
                             <Link
-                                className="nav-link text-light"
+                                className="nav-link text-light d-flex align-items-center justify-content-center ms-2" 
                                 to="#"
                                 onClick={() => setIsCartModalOpen(true)}
                             >
