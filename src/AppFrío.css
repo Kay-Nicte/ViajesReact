@@ -113,6 +113,14 @@ h6,
   color: var(--primary-color);
 }
 
+.btn-secondary {
+background-color: var(--text-color);
+}
+
+.btn-secondary:hover{
+background-color: var(--secondary-color);
+}
+
 .corazon {
   cursor: pointer;
   display: inline-flex;

@@ -1,5 +1,5 @@
 import { Destination } from '@/interface-models/interfaceDestination';
-import React from 'react';
+import React, { useState } from 'react';
 
 interface ModalDestinationProps {
     onClose: () => void; // Para cerrar el modal
@@ -7,13 +7,11 @@ interface ModalDestinationProps {
     body: JSX.Element;
     onAddToFavorites: (destination: Destination) => void;
     selectedDestination: Destination;
+    onAddToCart: (destination: Destination) => void;
 }
 
-const ModalDestinations: React.FC<ModalDestinationProps> = ({ onClose, title, body, selectedDestination, onAddToFavorites }) => {
 
-    const handleReserve = () => {
-        alert("Reservado. ¡Feliz viaje! :)");
-    };
+const ModalDestinations: React.FC<ModalDestinationProps> = ({ onClose, title, body, selectedDestination, onAddToFavorites, onAddToCart }) => {
 
     return (
         <div className="modal fade show" style={{ display: 'block' }} onClick={onClose}>
@@ -29,12 +27,16 @@ const ModalDestinations: React.FC<ModalDestinationProps> = ({ onClose, title, bo
                     <div className="modal-footer">
                         <button
                             type="button"
-                            className="btn btn-secondary"
+                            className="btn"
                             onClick={() => onAddToFavorites(selectedDestination)}
                         >
                             Agregar a Favoritos
                         </button>
-                        <button type="button" className="btn btn-primary" onClick={handleReserve}>
+                        <button
+                            type="button"
+                            className="btn"
+                            onClick={() => onAddToCart(selectedDestination)}
+                        >
                             Reservar
                         </button>
                         <button type="button" className="btn btn-secondary" onClick={onClose}>

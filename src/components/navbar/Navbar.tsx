@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ModalDestination from '../modals/ModalDestinations';
 import ModalFavorites from '../modals/ModalFavorites';
 import ModalContact from '../modals/ModalContact';
-import ModalCartPreview from '../modals/ModalCartPreview';
+import ModalCart from '../modals/ModalCart';
 import { Destination } from '../../interface-models/interfaceDestination';
 import baliImage from '/src/assets/imagenes/bali.jpg';
 import parisImage from '/src/assets/imagenes/paris.jpg';
@@ -15,15 +15,19 @@ interface NavbarProps {
     addToFavorites: (destination: Destination) => void;
     removeFromFavorites: (destination: Destination) => void;
     favorites: Destination[];
+    addToCart: (destination: Destination) => void;
+    removeFromCart: (destination: Destination) => void;
+    reservedDestinations: Destination[];
+
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onSearch, addToFavorites, removeFromFavorites, favorites }) => {
+const Navbar: React.FC<NavbarProps> = ({ onSearch, addToFavorites, removeFromFavorites, favorites, reservedDestinations, addToCart, removeFromCart }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [suggestions, setSuggestions] = useState<Destination[]>([]);
     const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
     const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
     const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-    const [isCartPreviewOpen, setIsCartPreviewOpen] = useState(false);
+    const [isCartModalOpen, setIsCartModalOpen] = useState(false);
 
     const destinations: Destination[] = [
         { id: 1, name: 'Bali', description: 'Una isla tropical paradisíaca', price: 1300, visitRoutes: ['Ruta 1: Meditación', 'Ruta 2: Templos'], image: baliImage, popularity: 5 },
@@ -69,15 +73,14 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, addToFavorites, removeFromFav
         setIsContactModalOpen(false);
     };
 
-    const handleOpenCartPreview = () => {
-        console.log('Abriendo el carrito de vista previa');
-        setIsCartPreviewOpen(true);
+    const handleAddToCart = (destination: Destination) => {
+        addToCart(destination);
+        alert(`${destination.name} añadido al carrito!`);
     };
 
-    const handleCloseCartPreview = () => {
-        setIsCartPreviewOpen(false);
+    const handleCloseModalCart = () => {
+        setIsCartModalOpen(false);
     };
-
 
     return (
         <nav className="navbar navbar-expand-lg sticky-top">
@@ -129,10 +132,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, addToFavorites, removeFromFav
                             <Link
                                 className="nav-link text-light"
                                 to="#"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setIsFavoritesModalOpen(true);
-                                }}
+                                onClick={() => setIsFavoritesModalOpen(true)}
                             >
                                 Favoritos
                             </Link>
@@ -148,7 +148,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, addToFavorites, removeFromFav
                         </li>
                     </ul>
                     <div className="position-relative">
-                        <form className="d-flex" role="search">
+                        <form className="d-flex" role="search" onSubmit={(e) => e.preventDefault()}>
                             <input
                                 className="form-control me-2"
                                 type="search"
@@ -158,9 +158,13 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, addToFavorites, removeFromFav
                                 onChange={handleSearchChange}
                             />
                             <button className="btn-search" type="submit">Buscar</button>
-                            <button className="btn" type="button" onClick={handleOpenCartPreview}>
+                            <Link
+                                className="nav-link text-light"
+                                to="#"
+                                onClick={() => setIsCartModalOpen(true)}
+                            >
                                 <i className="fas fa-shopping-cart fs-3"></i>
-                            </button>
+                            </Link>
                         </form>
                         {suggestions.length > 0 && (
                             <ul className="list-group position-absolute" style={{ zIndex: 1000, left: 0, right: 0 }}>
@@ -172,7 +176,6 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, addToFavorites, removeFromFav
                             </ul>
                         )}
                     </div>
-
                 </div>
             </div>
 
@@ -195,7 +198,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, addToFavorites, removeFromFav
                     )}
                     selectedDestination={selectedDestination}
                     onAddToFavorites={handleAddToFavorites}
+                    onAddToCart={handleAddToCart}
                 />
+
             )}
 
             {/* Modal de favoritos */}
@@ -204,27 +209,26 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, addToFavorites, removeFromFav
                     onClose={handleCloseModalFavorites}
                     favorites={favorites}
                     isOpen={isFavoritesModalOpen}
-                    onAddToFavorites={(destination) => { destination }}
-                    onRemoveFromFavorites={(destination) => { destination }}
+                    onAddToFavorites={addToFavorites}
+                    onRemoveFromFavorites={removeFromFavorites}
                 />
             )}
 
 
             {/* Modal de contacto */}
             {isContactModalOpen && (
-                <ModalContact
-                    onClose={handleCloseModalContact}
-                />
+                <ModalContact onClose={handleCloseModalContact} />
             )}
-            {/* Modal de vista previa del carrito */}
-            {isCartPreviewOpen && (
-                <>
-                    {console.log('El modal de carrito está abierto')}
-                    <ModalCartPreview
-                        isOpen={isCartPreviewOpen}
-                        onClose={handleCloseCartPreview}
-                    />
-                </>
+
+            {/* Modal de carrito */}
+            {isCartModalOpen && (
+                <ModalCart
+                    onClose={handleCloseModalCart}
+                    reservedDestinations={reservedDestinations}
+                    isOpen={isCartModalOpen}
+                    onAddToCart={addToCart}
+                    onRemoveFromCart={removeFromCart}
+                />
             )}
         </nav>
     );

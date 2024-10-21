@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { FaShoppingBag, FaHeart, FaRegHeart, FaShoppingBasket } from 'react-icons/fa';
 import baliImage from '/src/assets/imagenes/bali.jpg';
 import parisImage from '/src/assets/imagenes/paris.jpg';
 import nyImage from '/src/assets/imagenes/ny.jpg';
 import portoImage from '/src/assets/imagenes/porto.jpg';
-import Modal from '../components/modals/ModalDestinations';
+import ModalDestinations from '../components/modals/ModalDestinations';
 import { Destination } from '../interface-models/interfaceDestination';
 import ModalFavorites from '../components/modals/ModalFavorites';
+import ModalCart from '../components/modals/ModalCart';
 import '../AppFrío.css';
 
 interface DestinationsPageProps {
@@ -17,6 +18,8 @@ interface DestinationsPageProps {
     addToFavorites: (destination: Destination) => void;
     removeFromFavorites: (destination: Destination) => void;
     destinations: { id: number; name: string }[];
+    addToCart: (destination: Destination) => void;
+    removeFromCart: (destination: Destination) => void;
 }
 
 const DestinationsPage: React.FC<DestinationsPageProps> = ({
@@ -24,6 +27,8 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
     setSearchTerm,
     addToFavorites,
     removeFromFavorites,
+    addToCart,
+    removeFromCart,
 }) => {
     const destinations: Destination[] = [
         { id: 1, name: 'Bali', description: 'Una isla tropical paradisíaca', image: baliImage, price: 1300, popularity: 5, visitRoutes: ['Ruta 1: Meditación', 'Ruta 2: Templos', 'Ruta 3: Playas'] },
@@ -33,20 +38,22 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
     ];
 
     const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModalDestinations] = useState(false);
     const [minPrice, setMinPrice] = useState<number | ''>('');
     const [maxPrice, setMaxPrice] = useState<number | ''>('');
     const [sortOption, setSortOption] = useState('popularity');
     const [favorites, setFavorites] = useState<Destination[]>([]);
     const [showFavoritesModal, setShowFavoritesModal] = useState(false);
+    const [reservedDestinations, setCart] = useState<Destination[]>([]);
+    const [showCartModal, setShowCartModal] = useState(false);
 
-    const handleShowModal = (destination: Destination) => {
+    const handleShowModalDestinations = (destination: Destination) => {
         setSelectedDestination(destination);
-        setShowModal(true);
+        setShowModalDestinations(true);
     };
 
-    const handleCloseModal = () => {
-        setShowModal(false);
+    const handleCloseModalDestinations = () => {
+        setShowModalDestinations(false);
         setSelectedDestination(null);
     };
 
@@ -61,16 +68,40 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
     };
 
     const handleRemoveFromFavorites = (destination: Destination) => {
-        console.log("Eliminando destino desde DestinationsPage:", destination.name); 
-        setFavorites(prevFavorites => 
+        console.log("Eliminando destino desde DestinationsPage:", destination.name);
+        setFavorites(prevFavorites =>
             prevFavorites.filter(fav => fav.id !== destination.id));
-        removeFromFavorites(destination); 
+        removeFromFavorites(destination);
     };
 
     const handleAddToFavorites = (destination: Destination) => {
         if (!favorites.some(fav => fav.id === destination.id)) {
             addToFavorites(destination);
             setFavorites(prevFavorites => [...prevFavorites, destination]);
+        }
+    };
+
+    const handleCartToggle = (destination: Destination) => {
+        if (favorites.some(fav => fav.id === destination.id)) {
+            console.log('Removing from cart:', destination);
+            handleRemoveFromCart(destination);
+        } else {
+            console.log('Añadir al carrito desde DestinationsPage:', destination);
+            handleAddToCart(destination);
+        }
+    };
+
+    const handleRemoveFromCart = (destination: Destination) => {
+        console.log("Eliminando destino desde DestinationsPage:", destination.name);
+        setCart(prevCart =>
+            prevCart.filter(res => res.id !== destination.id));
+        removeFromCart(destination);
+    };
+
+    const handleAddToCart = (destination: Destination) => {
+        if (!reservedDestinations.some(res => res.id === destination.id)) {
+            addToCart(destination);
+            setCart(prevCart => [...prevCart, destination]);
         }
     };
 
@@ -173,10 +204,27 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
 
                                 <p className="card-text flex-grow-1 text-center">{destination.description}</p>
                                 <div className="d-flex justify-content-center mt-2">
-                                    <Link to={`/reservar/${destination.name.toLowerCase()}`} className="btn btn-primary w-45 mx-1">Reservar</Link>
+
+
+                                    <span
+                                        className="justify-content-end"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleCartToggle(destination);
+                                        }}
+                                        aria-label="Agregar o quitar de carrito"
+                                    >
+                                        {reservedDestinations.some(res => res.id === destination.id) ? (
+                                            <FaShoppingBag size={25} className="text-danger" />
+                                        ) : (
+                                            <FaShoppingBasket size={25} />
+                                        )}
+                                    </span>
+
+
                                     <button
                                         className="btn btn-outline-primary w-45 mx-1"
-                                        onClick={() => handleShowModal(destination)}
+                                        onClick={() => handleShowModalDestinations(destination)}
                                     >
                                         Más Info
                                     </button>
@@ -188,8 +236,8 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
             </div>
 
             {showModal && selectedDestination && (
-                <Modal
-                    onClose={handleCloseModal}
+                <ModalDestinations
+                    onClose={handleCloseModalDestinations}
                     title={selectedDestination.name}
                     body={
                         <>
@@ -205,6 +253,7 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
                     }
                     onAddToFavorites={handleAddToFavorites}
                     selectedDestination={selectedDestination}
+                    onAddToCart={handleAddToCart}
                 />
             )}
 
@@ -217,6 +266,18 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
                     onRemoveFromFavorites={handleRemoveFromFavorites}
                 />
             )}
+
+            {showCartModal && (
+                <ModalCart
+                    isOpen={showCartModal}
+                    onClose={() => setShowCartModal(false)}
+                    reservedDestinations={reservedDestinations}
+                    onAddToCart={handleAddToCart}
+                    onRemoveFromCart={handleRemoveFromCart}
+                />
+            )}
+
+
         </div>
     );
 };
