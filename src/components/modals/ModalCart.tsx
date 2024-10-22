@@ -31,7 +31,15 @@ const ModalCart: React.FC<ModalCartProps> = ({ reservedDestinations, isOpen, onC
                                 {reservedDestinations.map((destination) => (
                                     <li key={destination.id}>
                                         <strong>{destination.name}</strong>
+                                        <span
+                                            style={{ cursor: 'pointer', color: 'red', marginLeft: '10px' }} // Estilo personalizado
+                                            onClick={() => onRemoveFromCart(destination)}
+                                        >
+                                            <i className="fas fa-times"></i>
+                                        </span>
+
                                     </li>
+
                                 ))}
                             </ul>
                         ) : (

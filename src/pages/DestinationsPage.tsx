@@ -82,7 +82,7 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
     };
 
     const handleCartToggle = (destination: Destination) => {
-        if (favorites.some(fav => fav.id === destination.id)) {
+        if (reservedDestinations.some(res => res.id === destination.id)) {
             console.log('Removing from cart:', destination);
             handleRemoveFromCart(destination);
         } else {
@@ -94,8 +94,8 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
     const handleRemoveFromCart = (destination: Destination) => {
         console.log("Eliminando destino desde DestinationsPage:", destination.name);
         setCart(prevCart =>
-            prevCart.filter(res => res.id !== destination.id));
-        removeFromCart(destination);
+            prevCart.filter(res => res.id !== destination.id)); // Actualiza el estado del carrito
+        removeFromCart(destination); // Llama la función que recibe como prop para actualizaciones externas
     };
 
     const handleAddToCart = (destination: Destination) => {
@@ -224,7 +224,6 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
                                             </button>
                                         )}
                                     </span>
-
 
                                     <button
                                         className="btn btn-outline-primary w-45 mx-1"
