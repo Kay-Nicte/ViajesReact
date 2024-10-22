@@ -147,8 +147,10 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, addToFavorites, removeFromFav
                             </Link>
                         </li>
                         <li className="nav-item d-flex align-items-center">
-                            <a className="text-light text-decoration-none ms-2" href="#"><i>Login</i></a>
-                            <span className="text-light mx-2">/</span> {/* Slash con margen a los lados */}
+                            <Link to="/login" className='text-light text-decoration-none'>
+                                <i>Login</i>
+                            </Link>
+                            <span className="text-light mx-2">/</span>
                             <a className="text-light text-decoration-none" href="#"><i>Registro</i></a>
                         </li>
                     </ul>

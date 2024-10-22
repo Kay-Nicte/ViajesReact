@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './AppFrío.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
+import Login from './components/login/login';
 import HomePage from './components/home/HomePage';
 import DestinationsPage from './pages/DestinationsPage';
 import FAQPage from './pages/FAQPage';
@@ -91,6 +92,7 @@ function App() {
                 <main className="flex-fill">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
+                        <Route path="/login" element={<Login />} />
                         <Route
                             path="/destinos"
                             element={
