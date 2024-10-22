@@ -178,7 +178,8 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
 
             <div className="row">
                 {sortedDestinations.map((destination, index) => (
-                    <div className="col-6 col-md-4 mb-4" key={index}>
+                    // <div className="col-6 col-md-4 mb-4" key={index}>
+                    <div className="col-12 col-md-6 col-lg-4 mb-4" key={index}>
                         <div className="card d-flex flex-column h-100">
                             <img
                                 src={destination.image}
@@ -205,7 +206,7 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
                                 <p className="card-text flex-grow-1 text-center">{destination.description}</p>
                                 <div className="d-flex justify-content-center mt-2">
                                     <button
-                                        className={`btn ${reservedDestinations.some(res => res.id === destination.id) ? 'btn-secondary' : 'btn-primary'} h-100 w-75 ms-1`}
+                                        className={`btn ${reservedDestinations.some(res => res.id === destination.id) ? 'btn-secondary' : 'btn-primary'} h-100 w-50 ms-1`}
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             handleCartToggle(destination);
@@ -215,7 +216,7 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
                                     </button>
 
                                     <button
-                                        className="btn btn-outline-primary w-45 mx-1"
+                                        className="btn btn-outline-primary w-50 mx-1"
                                         onClick={() => handleShowModalDestinations(destination)}
                                     >
                                         Más Info
