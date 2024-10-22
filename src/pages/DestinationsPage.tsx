@@ -204,26 +204,15 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
 
                                 <p className="card-text flex-grow-1 text-center">{destination.description}</p>
                                 <div className="d-flex justify-content-center mt-2">
-
-
-                                    <span
-                                        className="justify-content-end"
+                                    <button
+                                        className={`btn ${reservedDestinations.some(res => res.id === destination.id) ? 'btn-secondary' : 'btn-primary'} h-100 w-75 ms-1`}
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             handleCartToggle(destination);
                                         }}
-                                        aria-label="Agregar o quitar de carrito"
                                     >
-                                        {reservedDestinations.some(res => res.id === destination.id) ? (
-                                            <button className='btn btn-secondary h-100'>
-                                                Reservado
-                                            </button>
-                                        ) : (
-                                            <button className='btn btn-primary h-100'>
-                                                Reservar
-                                            </button>
-                                        )}
-                                    </span>
+                                        {reservedDestinations.some(res => res.id === destination.id) ? 'Reservado' : 'Reservar'}
+                                    </button>
 
                                     <button
                                         className="btn btn-outline-primary w-45 mx-1"

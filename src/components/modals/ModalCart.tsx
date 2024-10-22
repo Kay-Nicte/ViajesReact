@@ -1,4 +1,4 @@
-import { Destination } from '@/interface-models/interfaceDestination';
+import { Destination } from '../../interface-models/interfaceDestination';
 import React from 'react';
 
 interface ModalCartProps {
@@ -14,7 +14,7 @@ const ModalCart: React.FC<ModalCartProps> = ({ reservedDestinations, isOpen, onC
 
     const handleRemove = (destination: Destination) => {
         console.log("Eliminando destino desde ModalCart:", destination);
-        onRemoveFromCart(destination); // Llamar a la función del padre!!
+        onRemoveFromCart(destination); //Llamar a la función del padre!! Actualiza en DestinationsPage
     };
 
     return (
