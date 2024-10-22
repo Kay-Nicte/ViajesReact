@@ -15,7 +15,9 @@ const ModalContact: React.FC<ModalContactProps> = ({ onClose }) => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:5000/api/contact', {
+            // const response = await fetch('http://localhost:5000/api/contact', {
+            const response = await fetch('https://viajes-node-83abe465dfd4.herokuapp.com/api/contact', {
+
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -33,9 +35,8 @@ const ModalContact: React.FC<ModalContactProps> = ({ onClose }) => {
             setMessage('');
             onClose();
         } catch (error) {
-            // Aserción de tipo
             const err = error as Error;
-            alert(err.message); // Ahora TypeScript sabe que 'error' es de tipo Error
+            alert(err.message);
         }
     };
 
