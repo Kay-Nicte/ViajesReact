@@ -146,6 +146,11 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, addToFavorites, removeFromFav
                                 Contacto
                             </Link>
                         </li>
+                        <li className="nav-item d-flex align-items-center">
+                            <a className="text-light text-decoration-none ms-2" href="#"><i>Login</i></a>
+                            <span className="text-light mx-2">/</span> {/* Slash con margen a los lados */}
+                            <a className="text-light text-decoration-none" href="#"><i>Registro</i></a>
+                        </li>
                     </ul>
                     <div className="position-relative">
                         <form className="d-flex" role="search" onSubmit={(e) => e.preventDefault()}>
@@ -159,7 +164,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, addToFavorites, removeFromFav
                             />
                             <button className="btn-search" type="submit">Buscar</button>
                             <Link
-                                className="nav-link text-light d-flex align-items-center justify-content-center ms-2" 
+                                className="nav-link text-light d-flex align-items-center justify-content-center ms-2"
                                 to="#"
                                 onClick={() => setIsCartModalOpen(true)}
                             >
