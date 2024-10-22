@@ -11,14 +11,32 @@ const ModalContact: React.FC<ModalContactProps> = ({ onClose }) => {
     const [message, setMessage] = useState('');
 
     // Función para envío del formulario
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        alert(`Nombre: ${name}\nCorreo: ${email}\nMensaje: ${message}`);
-        // Limpiar los campos del formulario después del envío
-        setName('');
-        setEmail('');
-        setMessage('');
-        onClose(); // Cerrar el modal después del envío
+
+        try {
+            const response = await fetch('http://localhost:5000/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, message }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al enviar el correo');
+            }
+
+            alert('Mensaje enviado con éxito');
+            setName('');
+            setEmail('');
+            setMessage('');
+            onClose();
+        } catch (error) {
+            // Aserción de tipo
+            const err = error as Error;
+            alert(err.message); // Ahora TypeScript sabe que 'error' es de tipo Error
+        }
     };
 
     return (
