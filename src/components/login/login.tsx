@@ -27,18 +27,44 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      {user ? (
-        <div className="welcome-container">
-          <h3>Bienvenido, {user.displayName}</h3>
-          <button className="logout-btn" onClick={handleLogout}>Cerrar Sesión</button>
-        </div>
-      ) : (
-        <button className="login-btn bg-light text-dark" onClick={handleLogin}>
-          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" className="google-icon" />
-          Iniciar Sesión con Google
-        </button>
-      )}
+      <h1>Inicio de Sesión</h1>
+      <div className='div-login text-light align-items-center justify-content-center text-center my-4'>
+
+        <label htmlFor="username" className='mb-2'>Usuario</label>
+        <input
+          type="text"
+          id="username"
+          placeholder="Ingresa tu usuario"
+          className="form-control mb-3 text-center"
+        />
+        <label htmlFor="password" className='mb-2'>Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Ingresa tu contraseña"
+          className="form-control mb-3 text-center"
+        />
+      </div>
+
+      <h4 className='mb-3'>O quizás prefieras:</h4>
+
+      <div>
+        {user ? (
+          <div className="welcome-container">
+            <h3>Bienvenido, {user.displayName}</h3>
+            <button className="btn btn-danger" onClick={handleLogout}>
+              Cerrar Sesión
+            </button>
+          </div>
+        ) : (
+          <button className="login-btn bg-light text-dark" onClick={handleLogin}>
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" className="google-icon" />
+            Iniciar Sesión con Google
+          </button>
+        )}
+      </div>
     </div>
+
   );
 };
 

@@ -40,7 +40,7 @@ h6,
 /* Navbar */
 /* ------------------------ */
 .navbar {
-  position: relative; 
+  position: relative;
   background-color: var(--primary-color);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -114,11 +114,11 @@ h6,
 }
 
 .btn-secondary {
-background-color: var(--text-color);
+  background-color: var(--text-color);
 }
 
-.btn-secondary:hover{
-background-color: var(--secondary-color);
+.btn-secondary:hover {
+  background-color: var(--secondary-color);
 }
 
 .corazon {
@@ -127,7 +127,7 @@ background-color: var(--secondary-color);
 }
 
 .bg-blue {
-  background-color: var(--primary-color) !important; 
+  background-color: var(--primary-color) !important;
   position: absolute;
   top: 665px;
   width: 100%;
@@ -136,7 +136,7 @@ background-color: var(--secondary-color);
 }
 
 .bg-gray {
-  background-color: var(--success-color) !important; 
+  background-color: var(--success-color) !important;
   position: absolute;
   top: 986px;
   width: 100%;
@@ -335,7 +335,7 @@ footer a:hover {
   transform: translate(-50%, -50%); /* Ajusta para centrar el texto correctamente */
   color: rgb(65, 61, 61); /* Cambia el color según tu diseño */
   text-align: center; /* Centra el texto */
-  z-index: 1; 
+  z-index: 1;
   padding: 10px; /* Espaciado alrededor del texto */
   border-radius: 5px; /* Bordes redondeados */
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Sombra para mayor visibilidad */
@@ -382,7 +382,6 @@ footer a:hover {
   border-color: #80bdff !important; /* Color del borde al pasar el ratón */
 }
 
-
 /* LOGIN */
 
 .login-container {
@@ -390,8 +389,8 @@ footer a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: #f0f0f0;
+  height: 80vh;
+  min-height: 100%;
 }
 
 .login-btn {
@@ -399,11 +398,11 @@ footer a:hover {
   align-items: center;
   justify-content: center;
   padding: 10px 20px;
-  border-color: #4285F4;
+  border-color: #4285f4;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  background-color: white !important;
 }
 
 .login-btn:hover {
@@ -432,6 +431,24 @@ footer a:hover {
 
 .logout-btn:hover {
   background-color: #c33d2f;
+}
+
+.div-login {
+  display: flex;
+  width: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  /* border-top: 2px solid #74a4f7; 
+  border-left: 2px solid #74a4f7; 
+  border-bottom: 2px solid #357ae8;
+  border-right: 2px solid #357ae8;  */
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  transition: background-color 0.3s ease;
 }
 
 /* FIN DEL LOGIN */
