@@ -105,6 +105,10 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({
         }
     };
 
+    const handleConfirm = () => {
+        setShowCartModal(false);
+    };
+
     const filteredDestinations = destinations.filter(destination => {
         const isNameMatch = destination.name.toLowerCase().includes(searchTerm.toLowerCase());
         const isMinPriceMatch = minPrice ? destination.price >= minPrice : true;

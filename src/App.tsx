@@ -12,6 +12,7 @@ import ModalFavorites from './components/modals/ModalFavorites';
 import { Destination } from './interface-models/interfaceDestination';
 import ModalCart from './components/modals/ModalCart';
 import ModalDestinations from './components/modals/ModalDestinations';
+import CartPage from './pages/CartPage';
 
 function App() {
     const [searchTerm, setSearchTerm] = useState<string>('');
@@ -23,24 +24,19 @@ function App() {
     const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
     const [isDestinationModalOpen, setIsDestinationModalOpen] = useState(false);
 
-    // Maneja el término de búsqueda
     const handleSearch = (term: string) => {
         setSearchTerm(term);
     };
 
-    // Maneja la apertura del modal de destinos
-    const handleModalDestination = (destination: Destination) => {
-        setSelectedDestination(destination);
-        setIsDestinationModalOpen(true);
+    const handleConfirm = () => {
+        setIsCartModalOpen(false);
     };
 
-    // Cierra el modal de destinos
     const closeDestinationModal = () => {
         setSelectedDestination(null);
         setIsDestinationModalOpen(false);
     };
 
-    // Añade un destino a los favoritos
     const addToFavorites = (destination: Destination) => {
         setFavorites((prevFavorites) => {
             if (prevFavorites.some(fav => fav.id === destination.id)) {
@@ -50,30 +46,26 @@ function App() {
         });
     };
 
-    // Elimina un destino de los favoritos
     const removeFromFavorites = (destination: Destination) => {
         setFavorites(prevFavorites =>
             prevFavorites.filter(fav => fav.id !== destination.id)
         );
     };
 
-
-    // Añade un destino al carrito
-    const addToCart = (destination: Destination) => {
-        setCart((prevCart) => {
-            if (prevCart.some(res => res.id === destination.id)) {
-                return prevCart; // Si el destino ya está en el carrito, no se añade de nuevo
-            }
-            return [...prevCart, destination];
-        });
-    };
-
-    // Elimina un destino del carrito
-    const removeFromCart = (destination: Destination) => {
-        setCart(prevCart =>
-            prevCart.filter(res => res.id !== destination.id)
-        );
-    };
+        const addToCart = (destination: Destination) => {
+            setCart((prevCart) => {
+                if (prevCart.some(res => res.id === destination.id)) {
+                    return prevCart; // Si el destino ya está en el carrito, no se añade de nuevo
+                }
+                return [...prevCart, destination];
+            });
+        };
+    
+        const removeFromCart = (destination: Destination) => {
+            setCart(prevCart =>
+                prevCart.filter(res => res.id !== destination.id)
+            );
+        };
 
     return (
         <Router>
@@ -83,16 +75,15 @@ function App() {
                     addToFavorites={addToFavorites}
                     removeFromFavorites={removeFromFavorites}
                     favorites={favorites}
-
                     addToCart={addToCart}
                     removeFromCart={removeFromCart}
                     reservedDestinations={reservedDestinations}
-
                 />
                 <main className="flex-fill">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/login" element={<Login />} />
+                        <Route path="/cart" element={<CartPage />} />
                         <Route
                             path="/destinos"
                             element={
@@ -104,7 +95,6 @@ function App() {
                                     addToCart={addToCart}
                                     removeFromCart={removeFromCart}
                                     destinations={destinations}
-
                                 />
                             }
                         />
@@ -131,15 +121,13 @@ function App() {
                     />
                 )}
 
-
                 <ModalCart
                     reservedDestinations={reservedDestinations}
                     isOpen={isCartModalOpen}
-                    onClose={() => setIsFavoritesModalOpen(false)}
+                    onClose={() => setIsCartModalOpen(false)}
                     onAddToCart={addToCart}
                     onRemoveFromCart={removeFromCart}
                 />
-
             </div>
         </Router>
     );

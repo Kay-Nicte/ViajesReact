@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Destination } from '../../interface-models/interfaceDestination';
 import React from 'react';
 
@@ -10,11 +11,14 @@ interface ModalCartProps {
 }
 
 const ModalCart: React.FC<ModalCartProps> = ({ reservedDestinations, isOpen, onClose, onRemoveFromCart }) => {
+
     if (!isOpen) return null;
 
+    const handleConfirm = () => {
+    };
     const handleRemove = (destination: Destination) => {
         console.log("Eliminando destino desde ModalCart:", destination);
-        onRemoveFromCart(destination); //Llamar a la función del padre!! Actualiza en DestinationsPage
+        onRemoveFromCart(destination); // Llama a la función del padre para actualizar en DestinationsPage
     };
 
     return (
@@ -32,14 +36,12 @@ const ModalCart: React.FC<ModalCartProps> = ({ reservedDestinations, isOpen, onC
                                     <li key={destination.id}>
                                         <strong>{destination.name}</strong>
                                         <span
-                                            style={{ cursor: 'pointer', color: 'red', marginLeft: '10px' }} // Estilo personalizado
-                                            onClick={() => onRemoveFromCart(destination)}
+                                            style={{ cursor: 'pointer', color: 'red', marginLeft: '10px' }}
+                                            onClick={() => handleRemove(destination)}
                                         >
                                             <i className="fas fa-times"></i>
                                         </span>
-
                                     </li>
-
                                 ))}
                             </ul>
                         ) : (
@@ -47,6 +49,7 @@ const ModalCart: React.FC<ModalCartProps> = ({ reservedDestinations, isOpen, onC
                         )}
                     </div>
                     <div className="modal-footer">
+                        <Link to="/cart" className="btn">Confirmar</Link>
                         <button type="button" className="btn btn-secondary" onClick={onClose}>
                             Cerrar
                         </button>
