@@ -10,6 +10,7 @@ import ModalDestinations from '../components/modals/ModalDestinations';
 import { Destination } from '../interface-models/interfaceDestination';
 import ModalFavorites from '../components/modals/ModalFavorites';
 import ModalCart from '../components/modals/ModalCart';
+import CartPage from './CartPage';
 import '../AppFrío.css';
 
 interface DestinationsPageProps {

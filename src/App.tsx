@@ -19,17 +19,13 @@ function App() {
     const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
     const [favorites, setFavorites] = useState<Destination[]>([]);
     const [isCartModalOpen, setIsCartModalOpen] = useState(false);
-    const [reservedDestinations, setCart] = useState<Destination[]>([]);
+    const [reservedDestinations, setReservedDestinations] = useState<Destination[]>([]);
     const [destinations] = useState<{ id: number; name: string }[]>([]);
     const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
     const [isDestinationModalOpen, setIsDestinationModalOpen] = useState(false);
 
     const handleSearch = (term: string) => {
         setSearchTerm(term);
-    };
-
-    const handleConfirm = () => {
-        setIsCartModalOpen(false);
     };
 
     const closeDestinationModal = () => {
@@ -52,22 +48,23 @@ function App() {
         );
     };
 
-        const addToCart = (destination: Destination) => {
-            setCart((prevCart) => {
-                if (prevCart.some(res => res.id === destination.id)) {
-                    return prevCart; // Si el destino ya está en el carrito, no se añade de nuevo
-                }
-                return [...prevCart, destination];
-            });
-        };
-    
-        const removeFromCart = (destination: Destination) => {
-            setCart(prevCart =>
-                prevCart.filter(res => res.id !== destination.id)
-            );
-        };
+    const addToCart = (destination: Destination) => {
+        setReservedDestinations((prevCart) => {
+            if (prevCart.some(res => res.id === destination.id)) {
+                return prevCart; // Si el destino ya está en el carrito, no se añade de nuevo
+            }
+            return [...prevCart, destination];
+        });
+    };
+
+    const removeFromCart = (destination: Destination) => {
+        setReservedDestinations(prevCart =>
+            prevCart.filter(res => res.id !== destination.id)
+        );
+    };
 
     return (
+
         <Router>
             <div className="d-flex flex-column min-vh-100">
                 <Navbar
@@ -83,7 +80,14 @@ function App() {
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/login" element={<Login />} />
-                        <Route path="/cart" element={<CartPage />} />
+                        {/* <Route path="/cart" element={<CartPage />} /> */}
+                        <Route path="/cart" element={
+                            <CartPage
+                                reservedDestinations={reservedDestinations}
+                                onRemoveFromCart={removeFromCart}
+                            />
+                        } />
+
                         <Route
                             path="/destinos"
                             element={
@@ -129,7 +133,9 @@ function App() {
                     onRemoveFromCart={removeFromCart}
                 />
             </div>
-        </Router>
+        </Router >
+
+
     );
 }
 
